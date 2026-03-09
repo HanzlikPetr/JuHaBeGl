@@ -21,7 +21,7 @@ Postup manuálního překladu
 ---------
 
 1. Získejte zdrojové kódy:
-   * Naklonováním repozitáře: `git clone <odkaz-na-vas-repozitar>`
+   * Naklonováním repozitáře: `git clone https://github.com/HanzlikPetr/JuHaBeGl`
    * NEBO rozbalením odevzdaného archivu.
 2. Otevřete terminál a přejděte do kořenové složky projektu.
 3. Přeložte projekt příkazem: `make all` 
