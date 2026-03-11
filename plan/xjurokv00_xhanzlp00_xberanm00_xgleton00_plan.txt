@@ -27,4 +27,4 @@ Komunikační kanál: Discord
 Pravidla: odpovidat v chatu (aspon reakci na danou zprávu), ať víme že si to všichni přečetli
 
 Systém pro správu verzí: GIT
-Hosting: GitHub, https://___, uživatel ivskontrola je přidán jako ____
+Hosting: GitHub, https://github.com/HanzlikPetr/JuHaBeGl, uživatel ivskontrola je přidán jako kolaborator.
