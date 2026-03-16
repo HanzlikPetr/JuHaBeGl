@@ -332,3 +332,101 @@ TEST(PowerTest, ZeroBaseNegExponent){
 TEST(PowerTest, BothZero){
     EXPECT_THROW(power(0.0, 0.0), std::invalid_argument); 
 }
+
+/**
+ * @brief Test suite for n-th root function.
+ * 
+ * Covers standart calculations,
+ * edge cases (0,1) 
+ * and exceptions handling for invalid inputs
+ */
+
+/**
+ * @brief Tests root of two positive numbers.
+ */
+TEST(RootTest, PositiveNumbers){
+    EXPECT_DOUBLE_EQ(root(2, 9.0), 3.0); 
+}
+
+/**
+ * @brief Tests root with decimal base number.
+ */
+TEST(RootTest, DecimalBase){
+    EXPECT_DOUBLE_EQ(root(2, 6.25), 2.5); 
+}
+
+/**
+ * @brief Tests root with zero base.
+ */
+TEST(RootTest, ZeroBase){
+    EXPECT_DOUBLE_EQ(root(2, 0.0), 0.0); 
+}
+
+/**
+ * @brief Tests root with base with number one.
+ */
+TEST(RootTest, BaseOne){
+    EXPECT_DOUBLE_EQ(root(3, 1.0), 1.0); 
+}
+
+/**
+ * @brief Tests root with degree with number one.
+ */
+TEST(RootTest, DegreeOne){
+    EXPECT_DOUBLE_EQ(root(1, 22.0), 22.0); 
+}
+
+/**
+ * @brief Tests root with odd number of degree and negative base.
+ */
+TEST(RootTest, NegBaseOddDegree){
+    EXPECT_DOUBLE_EQ(root(3, -8.0), -2.0); 
+}
+
+/**
+ * @brief Tests root with even number of degree and negative base.
+ */
+TEST(RootTest, NegBaseEvenDegree){
+    EXPECT_THROW(root(2.0, -9.0), std::invalid_argument); 
+}
+
+/**
+ * @brief Tests root with zero degree.
+ */
+TEST(RootTest, ZeroDegree){
+    EXPECT_THROW(root(0, 4.0), std::invalid_argument); 
+}
+
+/**
+ * @brief Tests root with positive base and negative degree.
+ */
+TEST(RootTest, NegativeDegree){
+    EXPECT_DOUBLE_EQ(root(-2, 4.0), 0.5); 
+}
+
+/**
+* @brief Test suite for the absolute value function
+*
+* Covers positive and negative numbers and zero
+*/
+
+/**
+ * @brief Tests absolute value with positive number.
+ */
+TEST(AbsoluteTest, PositiveNumbers){
+    EXPECT_DOUBLE_EQ(absoluteValue(82.0), 82.0); 
+}
+
+/**
+ * @brief Tests absolute value with negative number.
+ */
+TEST(AbsoluteTest, NegativeNumbers){
+    EXPECT_DOUBLE_EQ(absoluteValue(-42.0), 42.0); 
+}
+
+/**
+ * @brief Tests absolute value with zero.
+ */
+TEST(AbsoluteTest, Zero){
+    EXPECT_DOUBLE_EQ(absoluteValue(0), 0); 
+}
