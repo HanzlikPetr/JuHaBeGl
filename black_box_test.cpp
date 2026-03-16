@@ -211,3 +211,124 @@ TEST(DivisionTest, SmallerDividedByLarger){
 TEST(DivisionTest, BigNumbers){
     EXPECT_DOUBLE_EQ(divide(1000000.0, 2000.0), 500.0);
 }
+
+/**
+ * @brief Tests suite for the factorial function.
+ * 
+ * Covers standard positive inputs, edge cases(0, 1)
+ * and invalid negative inputs
+ */
+
+/**
+ * @brief Tests factorial with positive number.
+ */ 
+TEST(FactorialTest, PositiveNumbers){
+    EXPECT_DOUBLE_EQ(factorial(3), 6.0);
+}
+
+/**
+ * @brief Tests factorial with zero.
+ */ 
+TEST(FactorialTest, InputZero){
+    EXPECT_DOUBLE_EQ(factorial(0), 1.0);
+}
+
+/**
+ * @brief Tests factorial with one as an input.
+ */ 
+TEST(FactorialTest, InputOne){
+    EXPECT_DOUBLE_EQ(factorial(1), 1.0);
+}
+
+/**
+ * @brief Tests factorial with negative number.
+ */ 
+TEST(FactorialTest, NegativeNumbers){
+    EXPECT_THROW(factorial(-4), std::invalid_argument);
+}
+
+/**
+ * @brief Tests factorial with big number.
+ */ 
+TEST(FactorialTest, BigNumbers){
+    EXPECT_DOUBLE_EQ(factorial(10), 3628800.0);
+}
+
+/**
+ * @brief Test suite for power function.
+ * 
+ * Covers standard positive and negative inputs
+ * as well as edge cases (0,1) and invalid ZeroBaseNegExponent
+ * and BothZero 
+ */
+
+
+/**
+ * @brief Tests power of a positive number.
+ */
+TEST(PowerTest, BothPositive){
+    EXPECT_DOUBLE_EQ(power(10.0, 2), 100.0); 
+}
+
+/**
+ * @brief Tests power with decimal base.
+ */
+TEST(PowerTest, DecimalBase){
+    EXPECT_DOUBLE_EQ(power(2.5, 2), 6.25); 
+}
+
+/**
+ * @brief Tests power with exponent of 1.
+ */
+TEST(PowerTest, ExponentOne){
+    EXPECT_DOUBLE_EQ(power(9.0, 1), 9.0); 
+}
+
+/**
+ * @brief Tests power with exponent of 0.
+ */
+TEST(PowerTest, ExponentZero){
+    EXPECT_DOUBLE_EQ(power(9.0, 0), 1.0); 
+}
+
+/**
+ * @brief Tests power with base of 0.
+ */
+TEST(PowerTest, BaseZero){
+    EXPECT_DOUBLE_EQ(power(0.0, 4), 0.0); 
+}
+
+/**
+ * @brief Tests power with negative base and even exponent.
+ */
+TEST(PowerTest, NegBaseEvenExponent){
+    EXPECT_DOUBLE_EQ(power(-4.0, 2), 16.0); 
+}
+
+/**
+ * @brief Tests power with negative base and odd exponent.
+ */
+TEST(PowerTest, NegBaseOddExponent){
+    EXPECT_DOUBLE_EQ(power(-4.0, 3), -64.0); 
+}
+
+/**
+ * @brief Tests power of a negative exponent and positive base.
+ */
+TEST(PowerTest, NegExponPosBase){
+    EXPECT_DOUBLE_EQ(power(10.0, -2), 0.01); 
+}
+
+/**
+ * @brief Tests power of zero base and negative exponent.
+ */
+TEST(PowerTest, ZeroBaseNegExponent){
+    EXPECT_THROW(power(0.0, -2), std::invalid_argument); 
+}
+
+/**
+ * @brief Tests power of zero base and zero exponent.
+ */
+TEST(PowerTest, BothZero){
+    EXPECT_THROW(power(0.0, 0.0), std::invalid_argument); 
+}
