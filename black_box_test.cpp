@@ -430,3 +430,159 @@ TEST(AbsoluteTest, NegativeNumbers){
 TEST(AbsoluteTest, Zero){
     EXPECT_DOUBLE_EQ(absoluteValue(0), 0); 
 }
+
+/**
+ * @brief Test suite for the rounding function.
+ * 
+ * Covers rounding up, down and whole numbers,
+ * and exact half values.
+ */
+
+/**
+ * @brief Tests rounding of positive number to round up.
+ */
+TEST(RoundTest, PositiveNumberUp){
+    EXPECT_DOUBLE_EQ(roundNumber(3.8), 4.0); 
+}
+
+/**
+ * @brief Tests rounding of positive number to round down.
+ */
+TEST(RoundTest, PositiveNumberDown){
+    EXPECT_DOUBLE_EQ(roundNumber(2.2), 2.0); 
+}
+
+/**
+ * @brief Tests rounding of positive number ending .5.
+ */
+TEST(RoundTest, PositiveNumberHalfValue){
+    EXPECT_DOUBLE_EQ(roundNumber(5.5), 6.0); 
+}
+
+/**
+ * @brief Tests rounding of zero.
+ */
+TEST(RoundTest, Zero){
+    EXPECT_DOUBLE_EQ(roundNumber(0.0), 0.0); 
+}
+
+/**
+ * @brief Tests rounding of a whole number.
+ */
+TEST(RoundTest, WholeNumber){
+    EXPECT_DOUBLE_EQ(roundNumber(10.0), 10.0); 
+}
+
+/**
+ * @brief Tests rounding of negative number towards zero.
+ */
+TEST(RoundTest, NegativeNumberDown){
+    EXPECT_DOUBLE_EQ(roundNumber(-6.2), -6.0); 
+}
+
+/**
+ * @brief Tests rounding of negative number away from zero.
+ */
+TEST(RoundTest, NegativeNumberUp){
+    EXPECT_DOUBLE_EQ(roundNumber(-8.8), -9.0); 
+}
+
+/**
+ * @brief Tests rounding of negative number ending .5.
+ */
+TEST(RoundTest, NegativeNumberHalfValue){
+    EXPECT_DOUBLE_EQ(roundNumber(-5.5), -6.0); 
+}
+
+
+/**
+ * @brief Test suite for the EvalString function.
+ * 
+ * Covers basic arithmetic parsing, operator precedence,
+ * brackets, whitespace handling, and syntax error exceptions.
+ */
+
+
+/**
+ * @brief Tests EvalString function with basic numbers.
+ */
+TEST(EvalStringTest, BasicNumbers){
+    EXPECT_DOUBLE_EQ(evalString("2 + 3"), 5.0); 
+}
+
+/**
+ * @brief Tests EvalString function with decimal numbers.
+ */
+TEST(EvalStringTest, DecimalNumbers){
+    EXPECT_DOUBLE_EQ(evalString("2.5 * 4"), 10.0); 
+}
+
+/**
+ * @brief Tests EvalString function with negative numbers first.
+ */
+TEST(EvalStringTest, NegativeNumberFirst){
+    EXPECT_DOUBLE_EQ(evalString("-4 + 5"), 1.0); 
+}
+
+/**
+ * @brief Tests basic operator precedence.
+ */
+TEST(EvalStringTest, OperatorPrecedence){
+    EXPECT_DOUBLE_EQ(evalString("2 + 3 * 6"), 20.0); 
+}
+
+/**
+ * @brief Tests brackets precedence.
+ */
+TEST(EvalStringTest, BracketsPrecedence){
+    EXPECT_DOUBLE_EQ(evalString("(2 + 3) * 6"), 30.0); 
+}
+
+/**
+ * @brief Tests nested brackets precedence.
+ */
+TEST(EvalStringTest, NestedBracketsPrecedence){
+    EXPECT_DOUBLE_EQ(evalString("((2 + 3) * 6) / 6"), 5.0); 
+}
+
+/**
+ * @brief Tests EvalString function with more whitespaces.
+ */
+TEST(EvalStringTest, MoreWhitespaces){
+    EXPECT_DOUBLE_EQ(evalString(" 2  +  3 "), 5.0); 
+}
+
+/**
+ * @brief Tests EvalString function with no whitespaces.
+ */
+TEST(EvalStringTest, NoWhitespaces){
+    EXPECT_DOUBLE_EQ(evalString("10/5"), 2.0); 
+}
+
+/**
+ * @brief Tests EvalString function with more operators in a row.
+ */
+TEST(EvalStringTest, MoreOperators){
+    EXPECT_THROW(evalString("2 + * 3"), std::invalid_argument); 
+}
+
+/**
+ * @brief Tests EvalString function with missing number.
+ */
+TEST(EvalStringTest, MissingNumber){
+    EXPECT_THROW(evalString("2 * "), std::invalid_argument); 
+}
+
+/**
+ * @brief Tests failure with letters or invalid characters.
+ */
+TEST(EvalStringTest, InvalidCharacters){
+    EXPECT_THROW(evalString("2 * asd"), std::invalid_argument); 
+}
+
+/**
+ * @brief Tests EvalString function with empty string.
+ */
+TEST(EvalStringTest, EmptyString){
+    EXPECT_THROW(evalString(""), std::invalid_argument); 
+}
