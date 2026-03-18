@@ -404,9 +404,8 @@ TEST(RootTest, NegativeDegree){
     EXPECT_DOUBLE_EQ(root(-2, 4.0), 0.5); 
 }
 
-/**
-* @brief Test suite for the absolute value function
-*
+/*
+* Test suite for the absolute value function
 * Covers positive and negative numbers and zero
 */
 
