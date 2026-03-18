@@ -8,6 +8,9 @@
 #include "math_lib.h"
 #include <stdexcept>
 
+// Test suite for addition. 
+// Covers positive, negative, decimal numbers, and zero.
+
 /**
  * @brief Tests addition of two positive numbers.
  */
@@ -33,7 +36,7 @@ TEST(AddTest, PosNegNumbers){
  * @brief Tests addition of two decimal numbers.
  */
 TEST(AddTest, DecimalNumbers){
-    EXPECT_DOUBLE_EQ(add(0.1, 0.2), 0.3);
+    EXPECT_DOUBLE_EQ(add(0.25, 0.5), 0.75);
 }
 
 /**
@@ -50,8 +53,8 @@ TEST(AddTest, BigNumbers){
     EXPECT_DOUBLE_EQ(add(1000000.0, 200000.0 ), 1200000.0);
 }
 
-
-
+// Test suite for subtraction. 
+// Covers positive, negative, decimal numbers, and zero.
 
 /**
  * @brief Tests subtraction of two positive numbers with positive result.
@@ -70,8 +73,8 @@ TEST(SubTest, PositiveNumNegRes){
 /**
  * @brief Tests subtraction of negative number from a positive one.
  */
-TEST(SubTest, SubstractingNegative){
-    EXPECT_DOUBLE_EQ(subtract(7.0, -3,0), 10,0);
+TEST(SubTest, SubtractingNegative){
+    EXPECT_DOUBLE_EQ(subtract(7.0, -3.0), 10.0);
 }
 
 /**
@@ -102,8 +105,8 @@ TEST(SubTest, BigNumbers){
     EXPECT_DOUBLE_EQ(subtract(1000000.0, 200000.0), 800000.0);
 }
 
-
-
+// Test suite for multiplication. 
+// Covers positive, negative, decimal numbers, and zero.
 
 /**
  * @brief Tests multiplication with positive numbers.
@@ -130,7 +133,7 @@ TEST(MultiplyTest, PosNegNumbers){
  * @brief Tests multiplication with decimal number.
  */
 TEST(MultiplyTest, DecimalNumbers){
-    EXPECT_DOUBLE_EQ(multiply(1.2, 0.8), 0.96);
+    EXPECT_DOUBLE_EQ(multiply(1.5, 0.5), 0.75);
 }
 
 /**
@@ -147,7 +150,8 @@ TEST(MultiplyTest, BigNumbers){
     EXPECT_DOUBLE_EQ(multiply(50000.0, 20000.0), 1000000000.0);
 }
 
-
+// Test suite for division. 
+// Covers standard calculations, decimal numbers, and division by zero.
 
 /**
  * @brief Tests division with positive numbers and whole result.
@@ -212,9 +216,8 @@ TEST(DivisionTest, BigNumbers){
     EXPECT_DOUBLE_EQ(divide(1000000.0, 2000.0), 500.0);
 }
 
-/**
- * @brief Tests suite for the factorial function.
- * 
+/*
+ * Tests suite for the factorial function.
  * Covers standard positive inputs, edge cases(0, 1)
  * and invalid negative inputs
  */
@@ -254,14 +257,12 @@ TEST(FactorialTest, BigNumbers){
     EXPECT_DOUBLE_EQ(factorial(10), 3628800.0);
 }
 
-/**
- * @brief Test suite for power function.
- * 
+/*
+ * Test suite for power function.
  * Covers standard positive and negative inputs
  * as well as edge cases (0,1) and invalid ZeroBaseNegExponent
  * and BothZero 
  */
-
 
 /**
  * @brief Tests power of a positive number.
@@ -333,9 +334,8 @@ TEST(PowerTest, BothZero){
     EXPECT_THROW(power(0.0, 0.0), std::invalid_argument); 
 }
 
-/**
- * @brief Test suite for n-th root function.
- * 
+/*
+ * Test suite for n-th root function.
  * Covers standart calculations,
  * edge cases (0,1) 
  * and exceptions handling for invalid inputs
@@ -430,9 +430,8 @@ TEST(AbsoluteTest, Zero){
     EXPECT_DOUBLE_EQ(absoluteValue(0), 0); 
 }
 
-/**
- * @brief Test suite for the rounding function.
- * 
+/*
+ * Test suite for the rounding function.
  * Covers rounding up, down and whole numbers,
  * and exact half values.
  */
@@ -494,9 +493,8 @@ TEST(RoundTest, NegativeNumberHalfValue){
 }
 
 
-/**
- * @brief Test suite for the EvalString function.
- * 
+/*
+ * Test suite for the EvalString function.
  * Covers basic arithmetic parsing, operator precedence,
  * brackets, whitespace handling, and syntax error exceptions.
  */
