@@ -1,0 +1,7 @@
+*.o
+
+*.d
+
+run_tests
+
+googletest
