@@ -5,7 +5,7 @@
 */
 
 #include <gtest/gtest.h>
-#include "math_lib.h"
+#include "../math_lib/math_lib.h"
 #include <stdexcept>
 
 // Test suite for addition. 
