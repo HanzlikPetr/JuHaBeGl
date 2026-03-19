@@ -3,3 +3,5 @@
 *.d
 
 run_tests
+
+googletest
