@@ -5,3 +5,95 @@
 run_tests
 
 googletest
+
+*.o
+
+*.d
+
+run_tests
+
+googletest
+
+#gt generated
+# This file is used to ignore files which are generated
+# ----------------------------------------------------------------------------
+
+src/gui/*~
+src/gui/*.autosave
+src/gui/*.a
+src/gui/*.core
+src/gui/*.moc
+src/gui/*.o
+src/gui/*.obj
+src/gui/*.orig
+src/gui/*.rej
+src/gui/*.so
+src/gui/*.so.*
+src/gui/*_pch.h.cpp
+src/gui/*_resource.rc
+src/gui/*.qm
+src/gui/.#*
+src/gui/*.*#
+src/gui/core
+!src/gui/core/
+src/gui/tags
+src/gui/.DS_Store
+src/gui/.directory
+src/gui/*.debug
+src/gui/Makefile*
+src/gui/*.prl
+src/gui/*.app
+src/gui/moc_*.cpp
+src/gui/ui_*.h
+src/gui/qrc_*.cpp
+src/gui/Thumbs.db
+src/gui/*.res
+src/gui/*.rc
+src/gui/.qmake.cache
+src/gui/.qmake.stash
+
+# qtcreator generated files
+src/gui/*.pro.user*
+src/gui/*.qbs.user*
+src/gui/CMakeLists.txt.user*
+
+# xemacs temporary files
+src/gui/*.flc
+
+# Vim temporary files
+src/gui/.*.swp
+
+# Visual Studio generated files
+src/gui/*.ib_pdb_index
+src/gui/*.idb
+src/gui/*.ilk
+src/gui/*.pdb
+src/gui/*.sln
+src/gui/*.suo
+src/gui/*.vcproj
+src/gui/*vcproj.*.*.user
+src/gui/*.ncb
+src/gui/*.sdf
+src/gui/*.opensdf
+src/gui/*.vcxproj
+src/gui/*vcxproj.*
+
+# MinGW generated files
+src/gui/*.Debug
+src/gui/*.Release
+
+# Python byte code
+src/gui/*.pyc
+
+# Binaries
+# --------
+src/gui/*.dll
+src/gui/*.exe
+
+# Directories with generated files
+src/gui/.moc/
+src/gui/.obj/
+src/gui/.pch/
+src/gui/.rcc/
+src/gui/.uic/
+src/gui/build*/
