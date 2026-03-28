@@ -602,5 +602,13 @@ TEST(EvalStringTest, RootOperation){
  * @brief Tests EvalString function with rounding approximation.
  */
 TEST(EvalStringTest, RoundOperation){
-    EXPECT_DOUBLE_EQ(evalString("~~3.8"), 4.0); 
+    EXPECT_DOUBLE_EQ(evalString("≈3.8"), 4.0); 
+}
+
+TEST(EvalStringTest, FactorialOperation){
+    EXPECT_DOUBLE_EQ(evalString("5!"), 120.0);
+}
+
+TEST(EvalStringTest, AbsoluteValueOperation){
+    EXPECT_DOUBLE_EQ(evalString("|-5|"), 5.0);
 }
