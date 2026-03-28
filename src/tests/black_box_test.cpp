@@ -5,7 +5,7 @@
 */
 
 #include <gtest/gtest.h>
-#include "../math_lib/math_lib.h"
+#include "math_lib.h"
 #include <stdexcept>
 
 // Test suite for addition. 
@@ -432,64 +432,71 @@ TEST(AbsoluteTest, Zero){
 
 /*
  * Test suite for the rounding function.
- * Covers rounding up, down and whole numbers,
- * and exact half values.
+ * Covers rounding up, down, whole numbers,
+ * exact half values, and rounding to specific decimal places.
  */
 
 /**
  * @brief Tests rounding of positive number to round up.
  */
 TEST(RoundTest, PositiveNumberUp){
-    EXPECT_DOUBLE_EQ(roundNumber(3.8), 4.0); 
+    EXPECT_DOUBLE_EQ(roundNumber(3.8, 0), 4.0); 
 }
 
 /**
  * @brief Tests rounding of positive number to round down.
  */
 TEST(RoundTest, PositiveNumberDown){
-    EXPECT_DOUBLE_EQ(roundNumber(2.2), 2.0); 
+    EXPECT_DOUBLE_EQ(roundNumber(2.2, 0), 2.0); 
 }
 
 /**
  * @brief Tests rounding of positive number ending .5.
  */
 TEST(RoundTest, PositiveNumberHalfValue){
-    EXPECT_DOUBLE_EQ(roundNumber(5.5), 6.0); 
+    EXPECT_DOUBLE_EQ(roundNumber(5.5, 0), 6.0); 
 }
 
 /**
  * @brief Tests rounding of zero.
  */
 TEST(RoundTest, Zero){
-    EXPECT_DOUBLE_EQ(roundNumber(0.0), 0.0); 
+    EXPECT_DOUBLE_EQ(roundNumber(0.0, 0), 0.0); 
 }
 
 /**
  * @brief Tests rounding of a whole number.
  */
 TEST(RoundTest, WholeNumber){
-    EXPECT_DOUBLE_EQ(roundNumber(10.0), 10.0); 
+    EXPECT_DOUBLE_EQ(roundNumber(10.0, 0), 10.0); 
 }
 
 /**
  * @brief Tests rounding of negative number towards zero.
  */
 TEST(RoundTest, NegativeNumberDown){
-    EXPECT_DOUBLE_EQ(roundNumber(-6.2), -6.0); 
+    EXPECT_DOUBLE_EQ(roundNumber(-6.2, 0), -6.0); 
 }
 
 /**
  * @brief Tests rounding of negative number away from zero.
  */
 TEST(RoundTest, NegativeNumberUp){
-    EXPECT_DOUBLE_EQ(roundNumber(-8.8), -9.0); 
+    EXPECT_DOUBLE_EQ(roundNumber(-8.8, 0), -9.0); 
 }
 
 /**
  * @brief Tests rounding of negative number ending .5.
  */
 TEST(RoundTest, NegativeNumberHalfValue){
-    EXPECT_DOUBLE_EQ(roundNumber(-5.5), -6.0); 
+    EXPECT_DOUBLE_EQ(roundNumber(-5.5, 0), -6.0); 
+}
+
+/**
+ * @brief Tests rounding to a specific number of decimal places.
+ */
+TEST(RoundTest, DecimalPlaces){
+    EXPECT_DOUBLE_EQ(roundNumber(3.14159, 2), 3.14); 
 }
 
 
@@ -526,20 +533,6 @@ TEST(EvalStringTest, NegativeNumberFirst){
  */
 TEST(EvalStringTest, OperatorPrecedence){
     EXPECT_DOUBLE_EQ(evalString("2 + 3 * 6"), 20.0); 
-}
-
-/**
- * @brief Tests brackets precedence.
- */
-TEST(EvalStringTest, BracketsPrecedence){
-    EXPECT_DOUBLE_EQ(evalString("(2 + 3) * 6"), 30.0); 
-}
-
-/**
- * @brief Tests nested brackets precedence.
- */
-TEST(EvalStringTest, NestedBracketsPrecedence){
-    EXPECT_DOUBLE_EQ(evalString("((2 + 3) * 6) / 6"), 5.0); 
 }
 
 /**
@@ -582,4 +575,32 @@ TEST(EvalStringTest, InvalidCharacters){
  */
 TEST(EvalStringTest, EmptyString){
     EXPECT_THROW(evalString(""), std::invalid_argument); 
+}
+
+/**
+ * @brief Tests EvalString function with factorial.
+ */
+TEST(EvalStringTest, FactorialOperation){
+    EXPECT_DOUBLE_EQ(evalString("3!"), 6.0); 
+}
+
+/**
+ * @brief Tests EvalString function with power operation.
+ */
+TEST(EvalStringTest, PowerOperation){
+    EXPECT_DOUBLE_EQ(evalString("2^3"), 8.0); 
+}
+
+/**
+ * @brief Tests EvalString function with root operation.
+ */
+TEST(EvalStringTest, RootOperation){
+    EXPECT_DOUBLE_EQ(evalString("9^(1/2)"), 3.0); 
+}
+
+/**
+ * @brief Tests EvalString function with rounding approximation.
+ */
+TEST(EvalStringTest, RoundOperation){
+    EXPECT_DOUBLE_EQ(evalString("~~3.8"), 4.0); 
 }

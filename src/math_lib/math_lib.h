@@ -67,9 +67,10 @@ double absoluteValue(double a);
 /**
  * @brief Rounds decimal number.
  * @param a The number to round.
+ * @param decimalPlaces Number of decimal places to round to.
  * @return The rounded number.
  */
-double roundNumber(double a);
+double roundNumber(double a, int decimalPlaces);
 
 /**
  * @brief Reads text to calculate.
