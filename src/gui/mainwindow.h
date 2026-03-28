@@ -5,7 +5,7 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class MainWindow;
+class Calculator;
 }
 QT_END_NAMESPACE
 
@@ -17,6 +17,6 @@ class MainWindow : public QMainWindow {
     ~MainWindow();
 
    private:
-    Ui::MainWindow *ui;
+    Ui::Calculator *ui;
 };
 #endif  // MAINWINDOW_H

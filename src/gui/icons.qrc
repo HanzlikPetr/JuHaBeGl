@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/Root-rendered-by-TeX.svg.png</file>
+    </qresource>
+</RCC>
