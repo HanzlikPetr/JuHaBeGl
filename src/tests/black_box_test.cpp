@@ -5,7 +5,7 @@
 */
 
 #include <gtest/gtest.h>
-#include "math_lib.h"
+#include "../math_lib/math_lib.h"
 #include <stdexcept>
 
 // Test suite for addition. 
@@ -605,10 +605,34 @@ TEST(EvalStringTest, RoundOperation){
     EXPECT_DOUBLE_EQ(evalString("≈3.8"), 4.0); 
 }
 
+/**
+ * @brief Tests EvalString function with the factorial calculation.
+ */
 TEST(EvalStringTest, FactorialOperation){
     EXPECT_DOUBLE_EQ(evalString("5!"), 120.0);
 }
 
+/**
+ * @brief Tests EvalString function with absolute value calculation.
+ */
 TEST(EvalStringTest, AbsoluteValueOperation){
     EXPECT_DOUBLE_EQ(evalString("|-5|"), 5.0);
+}
+
+/**
+ * @brief Tests rounding to a specified number of decimal places (the number after ≈).
+ */
+TEST(EvalStringTest, RoundOperation){
+    EXPECT_DOUBLE_EQ(evalString("3.803284≈2"), 3.80);
+    EXPECT_DOUBLE_EQ(evalString("15.9876≈1"), 16.0); 
+}
+
+/**
+ * @brief Tests complex expressions combining multiple operations.
+ */
+TEST(EvalStringTest, ComplexOperations){
+    EXPECT_DOUBLE_EQ(evalString("|-3|+4!"), 27.0);
+    EXPECT_DOUBLE_EQ(evalString("10^(1/2)≈2"), 3.16);
+    EXPECT_DOUBLE_EQ(evalString("2*|-5|-4^(1/2)"), 8.0);
+    EXPECT_DOUBLE_EQ(evalString("3^2*|-2|"), 18.0);
 }
