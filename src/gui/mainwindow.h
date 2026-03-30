@@ -77,6 +77,24 @@ class MainWindow : public QMainWindow {
      */
     void on_button7_clicked();
 
+    void on_buttonPlus_clicked();
+
+    void on_buttonMinus_clicked();
+
+    void on_buttonMul_clicked();
+
+    void on_buttonDiv_clicked();
+
+    void on_buttonFac_clicked();
+
+    void on_buttonPower_clicked();
+
+    void on_buttonRoot_clicked();
+
+    void on_buttonAbs_clicked();
+
+    void on_buttonAprox_clicked();
+
    private:
     /**
      * @brief Take string and add to existing string, after that set that string to lineEdit (result)
@@ -84,7 +102,13 @@ class MainWindow : public QMainWindow {
      */
     void handleTextChange (QString change);
 
+    void handleTextChangeOperator (QString change);
+
     Ui::Calculator *ui;
     QString lineEditText = "";
+    bool lastOperator = true;
+    bool inRoot = false;
+    bool negativeNumber = false;
+    bool inAbs = false;
 };
 #endif  // MAINWINDOW_H
