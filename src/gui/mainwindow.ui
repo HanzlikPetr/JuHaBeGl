@@ -536,9 +536,9 @@ background-color: rgb(94, 92, 100)</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(94, 92, 100);
-font-size: bold;</string>
+         <string notr="true">color: rgb(255,255,255);
+font-weight: bold;
+background-color: rgb(94, 92, 100)</string>
         </property>
         <property name="text">
          <string>3</string>
