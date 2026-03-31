@@ -127,6 +127,24 @@ double roundNumber(double a, int decimalPlaces) {
     return intPart / places;
 }
 
+double rootOrPower(double base, double exponent) {
+    if (0 < absoluteValue(exponent) && absoluteValue(exponent) < 1) {
+        exponent = 1 / exponent;
+
+        if (exponent != roundNumber(exponent, 0)) {
+            throw std::invalid_argument("Error: Exponent must be a round number\n");
+        }
+
+        return root((int)exponent, base);
+    }
+
+    if (exponent != roundNumber(exponent, 0)) {
+        throw std::invalid_argument("Error: Exponent must be a round number\n");
+    }
+
+    return power(base, (int)exponent);
+}
+
 int priority(char operation) {
     if (operation == '^') return 3;
     if (operation == '*' || operation == '/') return 2;
@@ -140,6 +158,7 @@ bool rigthAssociative(char operation) { return operation == '^'; }
 std::vector<Token> parseInput(std::string expression) {
     std::vector<Token> tokens;
     bool abs_open = true;
+    bool expectOperand = true;
 
     if (expression.size() == 0) {
         throw std::invalid_argument("Error: No input given\n");
@@ -164,21 +183,26 @@ std::vector<Token> parseInput(std::string expression) {
             double number = std::stod(numberStr);
 
             tokens.push_back({NUMBER, number, 0});
+            expectOperand = false;
 
             i--;
         } else if ((c == '+') || (c == '*') || (c == '/') || (c == '^')) {
             tokens.push_back({OPERATOR, 0.0, c});
+            expectOperand = true;
         } else if (c == '-') {
-            if (tokens.empty() || tokens[tokens.size() - 1].type != NUMBER) {
+            // here if there is () - or || - , then it adds a 0 for nothing!!!
+            if (expectOperand) {
                 tokens.push_back({NUMBER, 0.0, 0});
             }
             tokens.push_back({OPERATOR, 0.0, '-'});
+            expectOperand = true;
         } else if (c == '(') {
             tokens.push_back({BRACKET_OPEN, 0.0, 0});
+            expectOperand = true;
         } else if (c == ')') {
             tokens.push_back({BRACKET_CLOSE, 0.0, 0});
+            expectOperand = false;
         } else if (c == '~') {
-            // tady
             tokens.push_back({OPERATOR, 0.0, '~'});
         } else if (c == '!') {
             tokens.push_back({FACTORIAL, 0.0, 0});
@@ -186,9 +210,11 @@ std::vector<Token> parseInput(std::string expression) {
             if (abs_open) {
                 tokens.push_back({ABS_OPEN, 0.0, 0});
                 abs_open = !abs_open;
+                expectOperand = true;
             } else {
                 tokens.push_back({ABS_CLOSE, 0.0, 0});
                 abs_open = !abs_open;
+                expectOperand = false;
             }
         } else {
             throw std::invalid_argument("Error: Unexpected input!\n");
@@ -305,7 +331,7 @@ double evaluate(std::vector<Token> postfix) {
 
                 case '^':
                     // choose between power and root - TODO
-                    result = power(a, (int)b);
+                    result = rootOrPower(a, b);
                     break;
 
                 case '~':
