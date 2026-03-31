@@ -45,10 +45,11 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QListView" name="histResult">
+       <widget class="QListWidget" name="histResult">
         <property name="styleSheet">
          <string notr="true">background-color: rgb(154, 153, 150);
-color: white;</string>
+color: white;
+</string>
         </property>
        </widget>
       </item>

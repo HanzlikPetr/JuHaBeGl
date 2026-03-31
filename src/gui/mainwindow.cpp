@@ -14,23 +14,41 @@ void MainWindow::handleTextChange(QString change)
     ui->result->setText(lineEditText);
 }
 
-void MainWindow::handleTextChangeOperator(QString change) {
-    if(!lastOperator && !inRoot) {
+bool MainWindow::handleTextChangeOperator(QString change) {
+    if(!lastOperator && !inRoot && change != ".") {
+        lastOperator = true;
+        nextNumber = true;
+        canUseDot = false;
+        handleTextChange(change);
+        return true;
+    }
+
+    if(change == "." && canUseDot && !inRoot) {
         lastOperator = true;
         handleTextChange(change);
+        canUseDot = false;
+        return true;
     }
+
+    return false;
 }
 
 void MainWindow::on_button0_clicked()
 {
-    handleTextChange("0");
-    if(!negativeNumber && !inAbs) lastOperator = false;
+    if(nextNumber) {
+        handleTextChange("0");
+        canUseDot = true;
+        if(!negativeNumber && !inAbs) lastOperator = false;
+    }
 }
 
 void MainWindow::on_button00_clicked()
 {
-    handleTextChange("00");
-    if(!negativeNumber && !inAbs) lastOperator = false;
+    if(nextNumber) {
+        handleTextChange("00");
+        canUseDot = true;
+        if(!negativeNumber && !inAbs) lastOperator = false;
+    }
 }
 
 void MainWindow::on_buttonFloatDot_clicked()
@@ -40,56 +58,83 @@ void MainWindow::on_buttonFloatDot_clicked()
 
 void MainWindow::on_button3_clicked()
 {
-    handleTextChange("3");
-    if(!negativeNumber && !inAbs) lastOperator = false;
+    if(nextNumber){
+        handleTextChange("3");
+        canUseDot = true;
+        if(!negativeNumber && !inAbs) lastOperator = false;
+    }
 }
 
 void MainWindow::on_button2_clicked()
 {
-    handleTextChange("2");
-    if(!negativeNumber && !inAbs) lastOperator = false;
+    if(nextNumber) {
+        handleTextChange("2");
+        canUseDot = true;
+        if(!negativeNumber && !inAbs) lastOperator = false;
+    }
 }
 
 void MainWindow::on_button1_clicked()
 {
-    handleTextChange("1");
-    if(!negativeNumber && !inAbs) lastOperator = false;
+    if(nextNumber) {
+        handleTextChange("1");
+        canUseDot = true;
+        if(!negativeNumber && !inAbs) lastOperator = false;
+    }
 }
 
 void MainWindow::on_button6_clicked()
 {
-    handleTextChange("6");
-    if(!negativeNumber && !inAbs) lastOperator = false;
+    if(nextNumber) {
+        handleTextChange("6");
+        canUseDot = true;
+        if(!negativeNumber && !inAbs) lastOperator = false;
+    }
 }
 
 void MainWindow::on_button5_clicked()
 {
-    handleTextChange("5");
-    if(!negativeNumber && !inAbs) lastOperator = false;
+    if(nextNumber) {
+        handleTextChange("5");
+        canUseDot = true;
+        if(!negativeNumber && !inAbs) lastOperator = false;
+    }
 }
 
 void MainWindow::on_button4_clicked()
 {
-    handleTextChange("4");
-    if(!negativeNumber && !inAbs) lastOperator = false;
+    if(nextNumber) {
+        handleTextChange("4");
+        canUseDot = true;
+        if(!negativeNumber && !inAbs) lastOperator = false;
+    }
 }
 
 void MainWindow::on_button9_clicked()
 {
-    handleTextChange("9");
-    if(!negativeNumber && !inAbs) lastOperator = false;
+    if(nextNumber) {
+        handleTextChange("9");
+        canUseDot = true;
+        if(!negativeNumber && !inAbs) lastOperator = false;
+    }
 }
 
 void MainWindow::on_button8_clicked()
 {
-    handleTextChange("8");
-    if(!negativeNumber && !inAbs) lastOperator = false;
+    if(nextNumber) {
+        handleTextChange("8");
+        canUseDot = true;
+        if(!negativeNumber && !inAbs) lastOperator = false;
+    }
 }
 
 void MainWindow::on_button7_clicked()
 {
-    handleTextChange("7");
-    if(!negativeNumber && !inAbs) lastOperator = false;
+    if(nextNumber) {
+        handleTextChange("7");
+        canUseDot = true;
+        if(!negativeNumber && !inAbs) lastOperator = false;
+    }
 }
 
 void MainWindow::on_buttonPlus_clicked()
@@ -108,6 +153,7 @@ void MainWindow::on_buttonMinus_clicked()
         } else {
             negativeNumber = false;
             lastOperator = false;
+            nextNumber = false;
             handleTextChange(")");
         }
     }
@@ -125,7 +171,10 @@ void MainWindow::on_buttonDiv_clicked()
 
 void MainWindow::on_buttonFac_clicked()
 {
-    handleTextChangeOperator("!");
+    if(handleTextChangeOperator("!")) {
+        lastOperator = false;
+        nextNumber = false;
+    }
 }
 
 void MainWindow::on_buttonPower_clicked()
@@ -138,9 +187,11 @@ void MainWindow::on_buttonRoot_clicked()
     if(!inRoot && !lastOperator) {
         handleTextChangeOperator("^(1/");
         inRoot = true;
-    } else if (inRoot) {
+    } else if (inRoot && !lastOperator) {
         handleTextChange(")");
         inRoot = false;
+        lastOperator = false;
+        nextNumber = false;
     }
 }
 
@@ -159,5 +210,45 @@ void MainWindow::on_buttonAbs_clicked()
 void MainWindow::on_buttonAprox_clicked()
 {
     handleTextChangeOperator("≈");
+}
+
+void MainWindow::on_buttonClear_clicked()
+{
+    lineEditText = "";
+    ui->result->clear();
+    lastOperator = true;
+    inRoot = false;
+    negativeNumber = false;
+    inAbs = false;
+    canUseDot = false;
+    nextNumber = true;
+}
+
+void MainWindow::on_buttonAC_clicked()
+{
+    handleTextChange(lastResult);
+    if(!negativeNumber && !inAbs) lastOperator = false;
+}
+
+void MainWindow::on_buttonEq_clicked()
+{
+    QString result = "TODO";
+    lastResult = result;
+    lastOperator = false;
+    inAbs = false;
+    inRoot = false;
+    negativeNumber = false;
+    canUseDot = false;
+    nextNumber = false;
+
+    ui->histResult->addItem(lineEditText + " = " + result);
+    ui->histResult->scrollToBottom();
+
+    if (ui->histResult->count() > 50) {
+        delete ui->histResult->takeItem(0);
+    }
+
+    ui->result->setText(result);
+    lineEditText = result;
 }
 
