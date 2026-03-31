@@ -18,6 +18,12 @@ class MainWindow : public QMainWindow {
     ~MainWindow();
 
    protected:
+    /**
+     * @brief Handles keyboard input for calculator operations.
+     * * Maps physical key presses (numbers, operators, Enter, Backspace)
+     * to their corresponding UI button clicks using animation.
+     * * @param event The key event containing information about the pressed key.
+     */
     void keyPressEvent(QKeyEvent *event) override;
 
    private slots:
@@ -186,6 +192,12 @@ class MainWindow : public QMainWindow {
      */
     void on_buttonEq_clicked();
 
+    /**
+     * @brief Removes the last character from the current expression.
+     * * Deletes the rightmost character in the input string, updates the
+     * display, and triggers a state recalculation to ensure continued
+     * valid input.
+     */
     void on_buttonBack_clicked();
 
    private:
@@ -205,6 +217,12 @@ class MainWindow : public QMainWindow {
      */
     bool handleTextChangeOperator(QString change);
 
+    /**
+     * @brief Recalculates internal state flags after a character deletion.
+     * * Analyzes the remaining expression from right to left to correctly
+     * restore flags such as `lastOperator`, `canUseDot`, `inRoot`, `inAbs`,
+     * and `negativeNumber` based on the context of the remaining characters.
+     */
     void updateFlagsAfterBackspace();
 
     Ui::Calculator *ui;
