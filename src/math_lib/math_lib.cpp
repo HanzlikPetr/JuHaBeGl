@@ -61,6 +61,10 @@ double factorial(int n) {
 double power(double base, int exponent) {
     double result = 1;
 
+    if (base == 0 && exponent <= 0) {
+        throw std::invalid_argument("Error: Undefined\n");
+    }
+
     for (int _ = absoluteValue(exponent); _ > 0; _--) {
         result *= base;
     }
@@ -73,10 +77,13 @@ double root(int degree, double base) {
     if (degree == 0) {
         throw std::invalid_argument("Error: Invalid degree of root!\n");
     } else if ((degree % 2 == 0) && (base < 0)) {
-        throw std::domain_error("Error: Result is not a real number!\n");
+        throw std::invalid_argument("Error: Result is not a real number!\n");
+    } else if (base == 0 && degree < 0) {
+        throw std::invalid_argument("Error: Division by hehehzero!\n");
     }
 
     double absBase = absoluteValue(base);
+    int absDegree = absoluteValue(degree);
 
     /* Early return for simple numbers */
     if ((absBase == 1.0) || (base == 0.0) || (degree == 1)) {
@@ -95,10 +102,10 @@ double root(int degree, double base) {
     do {
         previous = result;
 
-        result = ((degree - 1) * result + base / (power(result, degree - 1))) / degree;
+        result = ((absDegree - 1) * result + base / (power(result, absDegree - 1))) / absDegree;
     } while (absoluteValue(result - previous) > tolerance * absoluteValue(previous));
 
-    return result;
+    return degree > 0 ? result : (1 / result);
 }
 
 // TODO
@@ -122,8 +129,9 @@ double roundNumber(double a, int decimalPlaces) {
 
 int priority(char operation) {
     if (operation == '^') return 3;
-    if (operation == '*' || '/') return 2;
-    if (operation == '+' || '-') return 1;
+    if (operation == '*' || operation == '/') return 2;
+    if (operation == '+' || operation == '-') return 1;
+    if (operation == '~') return 4;
     return 0;
 }
 
@@ -133,8 +141,12 @@ std::vector<Token> parseInput(std::string expression) {
     std::vector<Token> tokens;
     bool abs_open = true;
 
+    if (expression.size() == 0) {
+        throw std::invalid_argument("Error: No input given\n");
+    }
+
     /* Scan given expression */
-    for (int i = 0; i < expression.size(); i++) {
+    for (size_t i = 0; i < expression.size(); i++) {
         char c = expression[i];
 
         if (c == ' ') continue;
@@ -143,8 +155,8 @@ std::vector<Token> parseInput(std::string expression) {
         if (((c >= '0') && (c <= '9')) || (c == '.')) {
             size_t start = i;
             /* Get the whole number */
-            while (i < expression.size() && (((c >= '0') && (c <= '9')) || (c == '.'))) {
-                c = expression[i];
+            while (i < expression.size() &&
+                   (((expression[i] >= '0') && (expression[i] <= '9')) || (expression[i] == '.'))) {
                 i++;
             }
 
@@ -154,18 +166,20 @@ std::vector<Token> parseInput(std::string expression) {
             tokens.push_back({NUMBER, number, 0});
 
             i--;
-        } else if ((c == '+') || (c == '-') || (c == '*') || (c == '/') ||
-                   (c == '^'))  // Get operation
-        {
+        } else if ((c == '+') || (c == '*') || (c == '/') || (c == '^')) {
             tokens.push_back({OPERATOR, 0.0, c});
+        } else if (c == '-') {
+            if (tokens.empty() || tokens[tokens.size() - 1].type != NUMBER) {
+                tokens.push_back({NUMBER, 0.0, 0});
+            }
+            tokens.push_back({OPERATOR, 0.0, '-'});
         } else if (c == '(') {
             tokens.push_back({BRACKET_OPEN, 0.0, 0});
         } else if (c == ')') {
             tokens.push_back({BRACKET_CLOSE, 0.0, 0});
         } else if (c == '~') {
-            if (++i < expression.size() && expression[i] == '~') {
-                tokens.push_back({ROUND, 0.0, 0});
-            }
+            // tady
+            tokens.push_back({OPERATOR, 0.0, '~'});
         } else if (c == '!') {
             tokens.push_back({FACTORIAL, 0.0, 0});
         } else if (c == '|') {
@@ -180,6 +194,8 @@ std::vector<Token> parseInput(std::string expression) {
             throw std::invalid_argument("Error: Unexpected input!\n");
         }
     }
+
+    return tokens;
 }
 
 std::vector<Token> shuntingYard(std::vector<Token> tokens) {
@@ -191,7 +207,7 @@ std::vector<Token> shuntingYard(std::vector<Token> tokens) {
             output.push_back(token);
         } else if (token.type == FACTORIAL) {
             output.push_back(token);
-        } else if ((token.type == ROUND) || (token.type == BRACKET_OPEN) ||
+        } else if ((token.type == BRACKET_OPEN) ||
                    (token.type == ABS_OPEN)) {
             operation.push(token);
         } else if (token.type == BRACKET_CLOSE) {
@@ -256,10 +272,16 @@ double evaluate(std::vector<Token> postfix) {
         if (token.type == NUMBER) {
             numbers.push(token.value);
         } else if (token.type == OPERATOR) {
-            double b = numbers.top();
-            numbers.pop();
-            double a = numbers.top();
-            numbers.pop();
+            double b;
+            double a;
+            if (numbers.size() >= 2) {
+                b = numbers.top();
+                numbers.pop();
+                a = numbers.top();
+                numbers.pop();
+            } else {
+                throw std::invalid_argument("Error: Too many operators!\n");
+            }
 
             double result;
 
@@ -282,7 +304,12 @@ double evaluate(std::vector<Token> postfix) {
                     break;
 
                 case '^':
+                    // choose between power and root - TODO
                     result = power(a, (int)b);
+                    break;
+
+                case '~':
+                    result = roundNumber(a, b);
                     break;
 
                 default:
@@ -292,17 +319,18 @@ double evaluate(std::vector<Token> postfix) {
 
             numbers.push(result);
         } else {
-            double a = numbers.top();
+            double a;
+            if (numbers.size() >= 1) {
+                a = numbers.top();
+            } else {
+                throw std::invalid_argument("Error: Too many operators!\n");
+            }
             numbers.pop();
             double result;
 
             switch (token.type) {
                 case FACTORIAL:
                     result = factorial((int)a);
-                    break;
-
-                case ROUND:
-                    result = roundNumber(a, 1);  // How to get how many decimal places?
                     break;
 
                 case ABS_FUNC:
