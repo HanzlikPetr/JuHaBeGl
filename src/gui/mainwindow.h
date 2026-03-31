@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -15,6 +16,9 @@ class MainWindow : public QMainWindow {
    public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+   protected:
+    void keyPressEvent(QKeyEvent *event) override;
 
    private slots:
     /**
@@ -182,6 +186,8 @@ class MainWindow : public QMainWindow {
      */
     void on_buttonEq_clicked();
 
+    void on_buttonBack_clicked();
+
    private:
     /**
      * @brief Appends a string to the expression and updates the display.
@@ -198,6 +204,8 @@ class MainWindow : public QMainWindow {
      * @return bool True if the operator was successfully appended, false otherwise.
      */
     bool handleTextChangeOperator(QString change);
+
+    void updateFlagsAfterBackspace();
 
     Ui::Calculator *ui;
     QString lineEditText = "";

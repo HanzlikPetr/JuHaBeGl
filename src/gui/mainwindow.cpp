@@ -4,6 +4,17 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::Calculator) {
     ui->setupUi(this);
+    ui->result->setFocusPolicy(Qt::NoFocus);
+    ui->histResult->setFocusPolicy(Qt::NoFocus);
+    for (QPushButton *button : this->findChildren<QPushButton*>()) {
+        button->setFocusPolicy(Qt::NoFocus);
+    }
+    this->setFocusPolicy(Qt::StrongFocus);
+    this->setFocus();
+
+    ui->buttonBack->setAutoRepeat(true);
+    ui->buttonBack->setAutoRepeatDelay(300);
+    ui->buttonBack->setAutoRepeatInterval(80);
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -252,3 +263,118 @@ void MainWindow::on_buttonEq_clicked()
     lineEditText = result;
 }
 
+void MainWindow::updateFlagsAfterBackspace()
+{
+    if (lineEditText.isEmpty()) {
+        lastOperator = true;
+        inRoot = false;
+        negativeNumber = false;
+        inAbs = false;
+        canUseDot = false;
+        nextNumber = true;
+        return;
+    }
+
+    QChar lastChar = lineEditText.back();
+
+    QString operators = "+-*/^(";
+    if (operators.contains(lastChar)) {
+        lastOperator = true;
+        nextNumber = true;
+    } else if (lastChar == '!' || lastChar == ')' || lastChar == '|') {
+        lastOperator = false;
+        nextNumber = false;
+    } else {
+        lastOperator = false;
+        nextNumber = true;
+    }
+
+    canUseDot = true;
+    if (!nextNumber) {
+        canUseDot = false;
+    } else {
+        for (int i = lineEditText.length() - 1; i >= 0; --i) {
+            QChar c = lineEditText.at(i);
+            if (c == '.') {
+                canUseDot = false;
+                break;
+            }
+            if (!c.isDigit()) {
+                break;
+            }
+        }
+    }
+
+    int absCount = lineEditText.count('|');
+    inAbs = (absCount % 2 != 0);
+
+    inRoot = false;
+    negativeNumber = false;
+    int openBrackets = 0;
+
+    for (int i = lineEditText.length() - 1; i >= 0; --i) {
+        if (lineEditText.at(i) == ')') {
+            openBrackets--;
+        } else if (lineEditText.at(i) == '(') {
+            openBrackets++;
+            if (openBrackets > 0) {
+                if (i + 1 < lineEditText.length() && lineEditText.at(i+1) == '-') {
+                    negativeNumber = true;
+                }
+                else if (i > 0 && lineEditText.at(i-1) == '^') {
+                    inRoot = true;
+                }
+                break;
+            }
+        }
+    }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    switch (event->key()) {
+        case Qt::Key_0: ui->button0->animateClick(); break;
+        case Qt::Key_1: ui->button1->animateClick(); break;
+        case Qt::Key_2: ui->button2->animateClick(); break;
+        case Qt::Key_3: ui->button3->animateClick(); break;
+        case Qt::Key_4: ui->button4->animateClick(); break;
+        case Qt::Key_5: ui->button5->animateClick(); break;
+        case Qt::Key_6: ui->button6->animateClick(); break;
+        case Qt::Key_7: ui->button7->animateClick(); break;
+        case Qt::Key_8: ui->button8->animateClick(); break;
+        case Qt::Key_9: ui->button9->animateClick(); break;
+
+        case Qt::Key_Plus:     ui->buttonPlus->animateClick(); break;
+        case Qt::Key_Minus:    ui->buttonMinus->animateClick(); break;
+        case Qt::Key_Asterisk: ui->buttonMul->animateClick(); break;
+        case Qt::Key_Slash:    ui->buttonDiv->animateClick(); break;
+        case Qt::Key_Exclam:   ui->buttonFac->animateClick(); break;
+
+        case Qt::Key_Enter:
+        case Qt::Key_Return:
+            ui->buttonEq->animateClick();
+            break;
+
+        case Qt::Key_Backspace:
+            ui->buttonBack->animateClick();
+            break;
+
+        case Qt::Key_Period:
+        case Qt::Key_Comma:
+            ui->buttonFloatDot->animateClick();
+            break;
+
+        default:
+            QMainWindow::keyPressEvent(event);
+            break;
+    }
+}
+
+void MainWindow::on_buttonBack_clicked()
+{
+    if (!lineEditText.isEmpty()) {
+        lineEditText.chop(1);
+        ui->result->setText(lineEditText);
+        updateFlagsAfterBackspace();
+    }
+}
