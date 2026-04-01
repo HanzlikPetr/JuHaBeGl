@@ -20,7 +20,6 @@ enum TokenType {
     NUMBER,
     OPERATOR,
     FACTORIAL,
-    //ROUND,
     ABS_OPEN,
     ABS_CLOSE,
     ABS_FUNC,
@@ -352,12 +351,6 @@ std::vector<Token> shuntingYard(std::vector<Token> tokens) {
             }
 
             operation.pop();
-
-
-            /*if (!operation.empty() && operation.top().type == ROUND) {
-                output.push_back(operation.top());
-                operation.pop();
-            }*/
         } else if (token.type == ABS_CLOSE) {
             /* Add tokens inside absolute value higher in final vector */
             while (!operation.empty() && operation.top().type != ABS_OPEN) {
