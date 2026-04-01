@@ -4,6 +4,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::Calculator) {
     ui->setupUi(this);
+    this->setWindowTitle(tr("Calculator"));
     ui->result->setFocusPolicy(Qt::NoFocus);
     ui->histResult->setFocusPolicy(Qt::NoFocus);
     for (QPushButton *button : this->findChildren<QPushButton*>()) {
@@ -15,6 +16,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::Calcul
     ui->buttonBack->setAutoRepeat(true);
     ui->buttonBack->setAutoRepeatDelay(300);
     ui->buttonBack->setAutoRepeatInterval(80);
+
+    ui->buttonPlus->setToolTip(tr("Addition. Format: number + number."));
+    ui->buttonMul->setToolTip(tr("Multiplication. Format: number * number."));
+    ui->buttonDiv->setToolTip(tr("Division. Format: number / number."));
+    ui->buttonMinus->setToolTip(tr("Subtraction or negative number. For a negative number, click to open '(-', type the number, and click again to close."));
+    ui->buttonFac->setToolTip(tr("Factorial. Requires only one number before the operator (e.g., 5!)."));
+    ui->buttonPower->setToolTip(tr("Power. Raises the first number to the power of the second (format: number ^ number)."));
+    ui->buttonRoot->setToolTip(tr("N-th root. Type the base, click to open '^(1/', type the degree, and click again to close."));
+    ui->buttonAbs->setToolTip(tr("Absolute value. Click to open '|', type the number, and click again to close."));
+    ui->buttonAprox->setToolTip(tr("Rounding. Format: number ≈ decimal_places (e.g., 2.69058 ≈ 2 = 2.69)."));
+    ui->buttonAC->setToolTip(tr("Last result. Inserts the result of the previous calculation."));
+    ui->buttonClear->setToolTip(tr("Clear. Clears the current expression and resets the calculator."));
 }
 
 MainWindow::~MainWindow() { delete ui; }
