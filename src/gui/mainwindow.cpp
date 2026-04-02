@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
 #include "./ui_mainwindow.h"
+#include "../math_lib/math_lib.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::Calculator) {
     ui->setupUi(this);
@@ -233,7 +234,7 @@ void MainWindow::on_buttonAbs_clicked()
 
 void MainWindow::on_buttonAprox_clicked()
 {
-    handleTextChangeOperator("≈");
+    handleTextChangeOperator("~");
 }
 
 void MainWindow::on_buttonClear_clicked()
@@ -256,8 +257,8 @@ void MainWindow::on_buttonAC_clicked()
 
 void MainWindow::on_buttonEq_clicked()
 {
-    QString result = "TODO";
-    lastResult = result;
+    double result = evalString(lineEditText.toStdString());
+    lastResult = QString::number(result);
     lastOperator = false;
     inAbs = false;
     inRoot = false;
@@ -265,15 +266,15 @@ void MainWindow::on_buttonEq_clicked()
     canUseDot = false;
     nextNumber = false;
 
-    ui->histResult->addItem(lineEditText + " = " + result);
+    ui->histResult->addItem(lineEditText + " = " + lastResult);
     ui->histResult->scrollToBottom();
 
     if (ui->histResult->count() > 50) {
         delete ui->histResult->takeItem(0);
     }
 
-    ui->result->setText(result);
-    lineEditText = result;
+    ui->result->setText(lastResult);
+    lineEditText = lastResult;
 }
 
 void MainWindow::updateFlagsAfterBackspace()
