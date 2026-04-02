@@ -1,3 +1,9 @@
+/**
+ * @file mainwindow.cpp
+ * @author Petr Hanzlík (xhanzlp00)
+ * @note Project: Calculator - JuHaBeGl
+*/
+
 #include "mainwindow.h"
 
 #include "./ui_mainwindow.h"
