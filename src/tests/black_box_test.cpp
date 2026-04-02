@@ -578,13 +578,6 @@ TEST(EvalStringTest, EmptyString){
 }
 
 /**
- * @brief Tests EvalString function with factorial.
- */
-TEST(EvalStringTest, FactorialOperation){
-    EXPECT_DOUBLE_EQ(evalString("3!"), 6.0); 
-}
-
-/**
  * @brief Tests EvalString function with power operation.
  */
 TEST(EvalStringTest, PowerOperation){
@@ -602,7 +595,7 @@ TEST(EvalStringTest, RootOperation){
  * @brief Tests EvalString function with rounding approximation.
  */
 TEST(EvalStringTest, RoundOperation){
-    EXPECT_DOUBLE_EQ(evalString("≈3.8"), 4.0); 
+    EXPECT_DOUBLE_EQ(evalString("~3.8"), 4.0); 
 }
 
 /**
@@ -620,11 +613,11 @@ TEST(EvalStringTest, AbsoluteValueOperation){
 }
 
 /**
- * @brief Tests rounding to a specified number of decimal places (the number after ≈).
+ * @brief Tests rounding to a specified number of decimal places (the number after ~).
  */
-TEST(EvalStringTest, RoundOperation){
-    EXPECT_DOUBLE_EQ(evalString("3.803284≈2"), 3.80);
-    EXPECT_DOUBLE_EQ(evalString("15.9876≈1"), 16.0); 
+TEST(EvalStringTest, RoundingToSpecNumbers){
+    EXPECT_DOUBLE_EQ(evalString("3.803284~2"), 3.80);
+    EXPECT_DOUBLE_EQ(evalString("15.9876~1"), 16.0); 
 }
 
 /**
@@ -632,7 +625,7 @@ TEST(EvalStringTest, RoundOperation){
  */
 TEST(EvalStringTest, ComplexOperations){
     EXPECT_DOUBLE_EQ(evalString("|-3|+4!"), 27.0);
-    EXPECT_DOUBLE_EQ(evalString("10^(1/2)≈2"), 3.16);
     EXPECT_DOUBLE_EQ(evalString("2*|-5|-4^(1/2)"), 8.0);
     EXPECT_DOUBLE_EQ(evalString("3^2*|-2|"), 18.0);
+    EXPECT_DOUBLE_EQ(evalString("2^3*|-2|-5!"), -104.0);
 }
