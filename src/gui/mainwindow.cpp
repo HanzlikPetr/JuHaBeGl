@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::Calcul
     ui->buttonPower->setToolTip(tr("Power. Raises the first number to the power of the second (format: number ^ number)."));
     ui->buttonRoot->setToolTip(tr("N-th root. Type the base, click to open '^(1/', type the degree, and click again to close."));
     ui->buttonAbs->setToolTip(tr("Absolute value. Click to open '|', type the number, and click again to close."));
-    ui->buttonAprox->setToolTip(tr("Rounding. Format: number ≈ decimal_places (e.g., 2.69058 ≈ 2 = 2.69)."));
+    ui->buttonAprox->setToolTip(tr("Rounding. Format: number ~ decimal_places. Has the lowest priority and evaluates last (e.g., 1 + 2.69058 ~ 2 = 3.69)."));
     ui->buttonAC->setToolTip(tr("Last result. Inserts the result of the previous calculation."));
     ui->buttonClear->setToolTip(tr("Clear. Clears the current expression and resets the calculator."));
 }

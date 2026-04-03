@@ -31,7 +31,6 @@ src/gui/*.so
 src/gui/*.so.*
 src/gui/*_pch.h.cpp
 src/gui/*_resource.rc
-src/gui/*.qm
 src/gui/.#*
 src/gui/*.*#
 src/gui/core

@@ -30,7 +30,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="193"/>
-        <source>≈</source>
+        <source>~</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -183,8 +183,8 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="28"/>
-        <source>Rounding. Format: number ≈ decimal_places (e.g., 2.69058 ≈ 2 = 2.69).</source>
-        <translation>Zaokrouhlení. Formát: číslo ≈ počet_desetinných_míst (např. 2.69058 ≈ 2 = 2.69).</translation>
+        <source>Rounding. Format: number ~ decimal_places. Has the lowest priority and evaluates last (e.g., 1 + 2.69058 ~ 2 = 3.69).</source>
+        <translation>Zaokrouhlení. Formát: číslo ~ počet_desetinných_míst. Operátor má nejnižší prioritu a provádí se jako poslední (např. 1 + 2.69058 ~ 2 = 3.69).</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="29"/>
