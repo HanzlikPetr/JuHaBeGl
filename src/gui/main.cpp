@@ -8,6 +8,7 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QLocale>
+#include <clocale>
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
     QTranslator translator;
 
     QString systemLanguage = QLocale::system().name();
+    std::setlocale(LC_NUMERIC, "C");
 
     if (systemLanguage.startsWith("cs")) {
         if (translator.load("kalkulacka_cs.qm", a.applicationDirPath())) {
