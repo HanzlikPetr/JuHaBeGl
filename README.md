@@ -47,3 +47,5 @@ Licence
 -------
 
 Tento program je svobodný software a je distribuován s otevřenými zdrojovými texty pod licencí GNU GPL v. 3. Můžete jej šířit a upravovat podle ustanovení této licence.
+
+Ikona aplikace pochází z kolekce [Google Material Icons](https://fonts.google.com/icons) a je využívána za podmínek licence Apache 2.0.
