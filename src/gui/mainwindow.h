@@ -9,6 +9,8 @@
 
 #include <QMainWindow>
 #include <QKeyEvent>
+#include <QMessageBox>
+#include <exception>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

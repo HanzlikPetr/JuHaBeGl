@@ -196,5 +196,69 @@
         <source>Clear. Clears the current expression and resets the calculator.</source>
         <translation>Vymazat. Smaže aktuální výraz a vyresetuje kalkulačku.</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation>Chyba</translation>
+    </message>
+    <message>
+        <source>Error: Division by zero!&#x0a;</source>
+        <translation>Chyba: Dělení nulou!&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Factorial for negative numbers is not defined!&#x0a;</source>
+        <translation>Chyba: Faktoriál pro záporná čísla není definován!&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Undefined&#x0a;</source>
+        <translation>Chyba: Nedefinováno&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Invalid degree of root!&#x0a;</source>
+        <translation>Chyba: Neplatný stupeň odmocniny!&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Result is not a real number!&#x0a;</source>
+        <translation>Chyba: Výsledek není reálné číslo!&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Division by hehehzero!&#x0a;</source>
+        <translation>Chyba: Dělení nulou!&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Exponent must be a round number&#x0a;</source>
+        <translation>Chyba: Exponent musí být celé číslo&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: No input given&#x0a;</source>
+        <translation>Chyba: Nebyl zadán žádný vstup&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Unexpected input!&#x0a;</source>
+        <translation>Chyba: Neočekávaný vstup!&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Empty brackets!&#x0a;</source>
+        <translation>Chyba: Prázdné závorky!&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Empty absolute value!&#x0a;</source>
+        <translation>Chyba: Prázdná absolutní hodnota!&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Mismatched brackets&#x0a;</source>
+        <translation>Chyba: Nespárované závorky&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Too many operators!&#x0a;</source>
+        <translation>Chyba: Příliš mnoho operátorů!&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Unknown operator&#x0a;</source>
+        <translation>Chyba: Neznámý operátor&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Unexpected token in postfix expression&#x0a;</source>
+        <translation>Chyba: Neočekávaný znak ve výrazu&#x0a;</translation>
+    </message>
 </context>
 </TS>

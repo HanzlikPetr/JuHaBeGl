@@ -263,24 +263,36 @@ void MainWindow::on_buttonAC_clicked()
 
 void MainWindow::on_buttonEq_clicked()
 {
-    double result = evalString(lineEditText.toStdString());
-    lastResult = QString::number(result);
-    lastOperator = false;
-    inAbs = false;
-    inRoot = false;
-    negativeNumber = false;
-    canUseDot = false;
-    nextNumber = false;
+    try {
+        double result = evalString(lineEditText.toStdString());
+        lastResult = QString::number(result);
+        lastOperator = false;
+        inAbs = false;
+        inRoot = false;
+        negativeNumber = false;
+        canUseDot = false;
+        nextNumber = false;
 
-    ui->histResult->addItem(lineEditText + " = " + lastResult);
-    ui->histResult->scrollToBottom();
+        ui->histResult->addItem(lineEditText + " = " + lastResult);
+        ui->histResult->scrollToBottom();
 
-    if (ui->histResult->count() > 50) {
-        delete ui->histResult->takeItem(0);
+        if (ui->histResult->count() > 50) {
+            delete ui->histResult->takeItem(0);
+        }
+
+        ui->result->setText(lastResult);
+        lineEditText = lastResult;
+    } catch (const std::exception& e) {
+        on_buttonClear_clicked();
+        QMessageBox msgbox;
+        msgbox.setIcon(QMessageBox::Critical);
+        msgbox.setWindowTitle(tr("Error"));
+        msgbox.setText(tr("Error"));
+        msgbox.setInformativeText(tr(e.what()));
+        msgbox.exec();
+
+        return;
     }
-
-    ui->result->setText(lastResult);
-    lineEditText = lastResult;
 }
 
 void MainWindow::updateFlagsAfterBackspace()
