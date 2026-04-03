@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>296</width>
+    <width>400</width>
     <height>465</height>
    </rect>
   </property>
@@ -190,7 +190,7 @@ font-weight: bold;
 background-color: rgb(40,40,40);</string>
         </property>
         <property name="text">
-         <string>≈</string>
+         <string>~</string>
         </property>
        </widget>
       </item>

@@ -1,8 +1,16 @@
+/**
+ * @file main.cpp
+ * @author Petr Hanzlík (xhanzlp00)
+ * @note Project: Calculator - JuHaBeGl
+*/
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
 #include <QKeyEvent>
+#include <QMessageBox>
+#include <exception>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

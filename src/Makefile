@@ -10,7 +10,7 @@ TEST_SRCS = $(wildcard ./tests/*.cpp)
 MATH_LIB_OBJS = $(MATH_LIB_SRCS:.cpp=.o)
 TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 
-GUI_SRC =  $(wildcard ./gui/*.cpp) $(wildcard ./gui/*.h) $(wildcard ./gui/*.ui)
+GUI_SRC =  $(wildcard ./gui/*.cpp) $(wildcard ./gui/*.h) $(wildcard ./gui/*.ui) $(wildcard ./gui/*.qm)
 GUI_DIR = ./gui/build
 
 ALL_DEPS = $(MATH_LIB_OBJS:.o=.d) $(TEST_OBJS:.o=.d)
@@ -65,6 +65,7 @@ $(TARGET_GUI): $(GUI_SRC) | $(GUI_DIR)
 		echo "Spoustim CMake..."; \
 		cd $(GUI_DIR) && cmake ..; \
 	fi
+	cp ./gui/kalkulacka_cs.qm $(GUI_DIR)/kalkulacka_cs.qm;
 	$(MAKE) -C $(GUI_DIR)
 
 # Pattern rule to compile .cpp files into .o files, generating dependency files as well

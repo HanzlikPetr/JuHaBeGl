@@ -1,6 +1,13 @@
+/**
+ * @file mainwindow.cpp
+ * @author Petr Hanzlík (xhanzlp00)
+ * @note Project: Calculator - JuHaBeGl
+*/
+
 #include "mainwindow.h"
 
 #include "./ui_mainwindow.h"
+#include "../math_lib/math_lib.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::Calculator) {
     ui->setupUi(this);
@@ -25,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::Calcul
     ui->buttonPower->setToolTip(tr("Power. Raises the first number to the power of the second (format: number ^ number)."));
     ui->buttonRoot->setToolTip(tr("N-th root. Type the base, click to open '^(1/', type the degree, and click again to close."));
     ui->buttonAbs->setToolTip(tr("Absolute value. Click to open '|', type the number, and click again to close."));
-    ui->buttonAprox->setToolTip(tr("Rounding. Format: number ≈ decimal_places (e.g., 2.69058 ≈ 2 = 2.69)."));
+    ui->buttonAprox->setToolTip(tr("Rounding. Format: number ~ decimal_places. Has the lowest priority and evaluates last (e.g., 1 + 2.69058 ~ 2 = 3.69)."));
     ui->buttonAC->setToolTip(tr("Last result. Inserts the result of the previous calculation."));
     ui->buttonClear->setToolTip(tr("Clear. Clears the current expression and resets the calculator."));
 }
@@ -233,7 +240,7 @@ void MainWindow::on_buttonAbs_clicked()
 
 void MainWindow::on_buttonAprox_clicked()
 {
-    handleTextChangeOperator("≈");
+    handleTextChangeOperator("~");
 }
 
 void MainWindow::on_buttonClear_clicked()
@@ -256,24 +263,36 @@ void MainWindow::on_buttonAC_clicked()
 
 void MainWindow::on_buttonEq_clicked()
 {
-    QString result = "TODO";
-    lastResult = result;
-    lastOperator = false;
-    inAbs = false;
-    inRoot = false;
-    negativeNumber = false;
-    canUseDot = false;
-    nextNumber = false;
+    try {
+        double result = evalString(lineEditText.toStdString());
+        lastResult = QString::number(result);
+        lastOperator = false;
+        inAbs = false;
+        inRoot = false;
+        negativeNumber = false;
+        canUseDot = false;
+        nextNumber = false;
 
-    ui->histResult->addItem(lineEditText + " = " + result);
-    ui->histResult->scrollToBottom();
+        ui->histResult->addItem(lineEditText + " = " + lastResult);
+        ui->histResult->scrollToBottom();
 
-    if (ui->histResult->count() > 50) {
-        delete ui->histResult->takeItem(0);
+        if (ui->histResult->count() > 50) {
+            delete ui->histResult->takeItem(0);
+        }
+
+        ui->result->setText(lastResult);
+        lineEditText = lastResult;
+    } catch (const std::exception& e) {
+        on_buttonClear_clicked();
+        QMessageBox msgbox;
+        msgbox.setIcon(QMessageBox::Critical);
+        msgbox.setWindowTitle(tr("Error"));
+        msgbox.setText(tr("Error"));
+        msgbox.setInformativeText(tr(e.what()));
+        msgbox.exec();
+
+        return;
     }
-
-    ui->result->setText(result);
-    lineEditText = result;
 }
 
 void MainWindow::updateFlagsAfterBackspace()
