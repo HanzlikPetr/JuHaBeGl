@@ -10,8 +10,8 @@
 #include <stdexcept>
 #include <vector>
 
-/**
- * @brief Token types for expression parsing.
+/*
+ * Token types for expression parsing.
  *
  * Represents the different types of tokens that can appear
  * in a mathematical expression during parsing.
@@ -27,8 +27,8 @@ enum TokenType {
     BRACKET_CLOSE
 };
 
-/**
- * @brief Represents a token in the mathematical expression.
+/*
+ * Represents a token in the mathematical expression.
  *
  * Stores the type of token and it's associated value of operator.
  */
@@ -38,43 +38,14 @@ struct Token {
     char operation;
 };
 
-/**
- * @brief Makes number positive.
- * @param a Any number.
- * @return The absolute value.
- */
 double absoluteValue(double a) { return a >= 0 ? a : -a; }
 
-/**
- * @brief Adds two numbers together.
- * @param a First number to be added.
- * @param b Second number to be added.
- * @return The sum of the two numbers.
-*/
 double add(double a, double b) { return a + b; }
 
-/**
- * @brief Subtracts two numbers.
- * @param a Number to be subtracted from.
- * @param b Number to substract.
- * @return The difference between the two numbers.
- */
 double subtract(double a, double b) { return a - b; }
 
-/**
- * @brief Multiplies two numbers.
- * @param a First number to multiply.
- * @param b Second number to multiply.
- * @return The result of multipling a and b.
- */
 double multiply(double a, double b) { return a * b; }
 
-/**
- * @brief Divides two numbers.
- * @param a Number to be divided from.
- * @param b Number to divide.
- * @return The result of dividing a and b.
- */
 double divide(double a, double b) {
     if (b == 0.0) {
         throw std::invalid_argument("Error: Division by zero!\n");
@@ -83,11 +54,6 @@ double divide(double a, double b) {
     return a / b;
 }
 
-/**
- * @brief Calculates factorial of a number.
- * @param n The integer to calculate the factorial for. (must not be negative)
- * @return Factorial of the number.
- */
 double factorial(int n) {
     if (n < 0.0) {
         throw std::invalid_argument("Error: Factorial for negative numbers is not defined!\n");
@@ -102,12 +68,6 @@ double factorial(int n) {
     return result;
 }
 
-/**
- * @brief Raises a base number to a given power.
- * @param base The base number.
- * @param exponent The exponent (must be natural number)
- * @return The result of the base raised by exponent.
- */
 double power(double base, int exponent) {
     double result = 1;
 
@@ -122,12 +82,6 @@ double power(double base, int exponent) {
     return exponent >= 0 ? result : (1 / result);
 }
 
-/**
- * @brief Calculates the root of a number.
- * @param degree The type of root.
- * @param base The number to find the root of.
- * @return The result of the root.
- */
 double root(int degree, double base) {
     if (degree == 0) {
         throw std::invalid_argument("Error: Invalid degree of root!\n");
@@ -163,12 +117,6 @@ double root(int degree, double base) {
     return degree > 0 ? result : (1 / result);
 }
 
-/**
- * @brief Rounds decimal number.
- * @param a The number to round.
- * @param decimalPlaces Number of decimal places to round to.
- * @return The rounded number.
- */
 double roundNumber(double a, int decimalPlaces) {
     int places = power(10, decimalPlaces);
     double abs = absoluteValue(a);
@@ -194,11 +142,11 @@ double roundNumber(double a, int decimalPlaces) {
     return intPart / places;
 }
 
-/**
- * @brief Performs a root or power.
- * @param base The base used for calculation.
- * @param exponent The exponent to choose between root and power and to calculate it.
- * @return The result of root or power.
+/*
+ * Performs a root or power.
+ * param base The base used for calculation.
+ * param exponent The exponent to choose between root and power and to calculate it.
+ * return The result of root or power.
  */
 double rootOrPower(double base, double exponent) {
     /* Check if the operation should be root */
@@ -221,30 +169,29 @@ double rootOrPower(double base, double exponent) {
     return power(base, (int)exponent);
 }
 
-/**
- * @brief Decides priority of operation.
- * @param operation The operation to give priority to.
- * @return The priority of operation.
+/*
+ * Decides priority of operation.
+ * operation The operation to give priority to.
+ * The priority of operation.
  */
 int priority(char operation) {
     if (operation == '^') return 3;
     if (operation == '*' || operation == '/') return 2;
     if (operation == '+' || operation == '-') return 1;
-    if (operation == '~') return 4;
     return 0;
 }
 
-/**
- * @brief Checks right-associativeness of operation.
- * @param operation The operation to check the right-associativeness of.
- * @return The result of root or power.
+/*
+ * Checks right-associativeness of operation.
+ * operation The operation to check the right-associativeness of.
+ * The result of root or power.
  */
 bool rigthAssociative(char operation) { return operation == '^'; }
 
-/**
- * @brief Parse given expression into tokens.
- * @param expression The expression to be parsed.
- * @return The tokens parsed from expression.
+/*
+ * Parse given expression into tokens.
+ * expression The expression to be parsed.
+ * The tokens parsed from expression.
  */
 std::vector<Token> parseInput(std::string expression) {
     std::vector<Token> tokens;
@@ -322,10 +269,10 @@ std::vector<Token> parseInput(std::string expression) {
     return tokens;
 }
 
-/**
- * @brief Performs a Shunting Yard Algorithm.
- * @param tokens The tokens to do the algirithm over.
- * @return Correctly sorted tokens for evaluation.
+/*
+ * Performs a Shunting Yard Algorithm.
+ * tokens The tokens to do the algirithm over.
+ * Correctly sorted tokens for evaluation.
  */
 std::vector<Token> shuntingYard(std::vector<Token> tokens) {
     std::vector<Token> output;
@@ -336,8 +283,7 @@ std::vector<Token> shuntingYard(std::vector<Token> tokens) {
             output.push_back(token);
         } else if (token.type == FACTORIAL) {
             output.push_back(token);
-        } else if ((token.type == BRACKET_OPEN) ||
-                   (token.type == ABS_OPEN)) {
+        } else if ((token.type == BRACKET_OPEN) || (token.type == ABS_OPEN)) {
             operation.push(token);
         } else if (token.type == BRACKET_CLOSE) {
             /* Add tokens inside brackets higher in final vector */
@@ -393,10 +339,10 @@ std::vector<Token> shuntingYard(std::vector<Token> tokens) {
     return output;
 }
 
-/**
- * @brief Evaluates the tokens in postfix.
- * @param postfix The postfix to be evaluated.
- * @return The result of mathematical operations.
+/*
+ * Evaluates the tokens in postfix.
+ * postfix The postfix to be evaluated.
+ * The result of mathematical operations.
  */
 double evaluate(std::vector<Token> postfix) {
     std::stack<double> numbers;
@@ -485,11 +431,6 @@ double evaluate(std::vector<Token> postfix) {
     return numbers.top();
 }
 
-/**
- * @brief Reads text to calculate.
- * @param expression The text to calculate.
- * @return The result of the expression.
- */
 double evalString(std::string expression) {
     auto tokens = parseInput(expression);
     auto postfix = shuntingYard(tokens);
