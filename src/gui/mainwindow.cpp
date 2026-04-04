@@ -69,7 +69,7 @@ void MainWindow::on_button0_clicked()
     if(nextNumber) {
         handleTextChange("0");
         canUseDot = true;
-        if(!negativeNumber && !inAbs) lastOperator = false;
+        if(!negativeNumber) lastOperator = false;
     }
 }
 
@@ -78,7 +78,7 @@ void MainWindow::on_button00_clicked()
     if(nextNumber) {
         handleTextChange("00");
         canUseDot = true;
-        if(!negativeNumber && !inAbs) lastOperator = false;
+        if(!negativeNumber) lastOperator = false;
     }
 }
 
@@ -92,7 +92,7 @@ void MainWindow::on_button3_clicked()
     if(nextNumber){
         handleTextChange("3");
         canUseDot = true;
-        if(!negativeNumber && !inAbs) lastOperator = false;
+        if(!negativeNumber) lastOperator = false;
     }
 }
 
@@ -101,7 +101,7 @@ void MainWindow::on_button2_clicked()
     if(nextNumber) {
         handleTextChange("2");
         canUseDot = true;
-        if(!negativeNumber && !inAbs) lastOperator = false;
+        if(!negativeNumber) lastOperator = false;
     }
 }
 
@@ -110,7 +110,7 @@ void MainWindow::on_button1_clicked()
     if(nextNumber) {
         handleTextChange("1");
         canUseDot = true;
-        if(!negativeNumber && !inAbs) lastOperator = false;
+        if(!negativeNumber) lastOperator = false;
     }
 }
 
@@ -119,7 +119,7 @@ void MainWindow::on_button6_clicked()
     if(nextNumber) {
         handleTextChange("6");
         canUseDot = true;
-        if(!negativeNumber && !inAbs) lastOperator = false;
+        if(!negativeNumber) lastOperator = false;
     }
 }
 
@@ -128,7 +128,7 @@ void MainWindow::on_button5_clicked()
     if(nextNumber) {
         handleTextChange("5");
         canUseDot = true;
-        if(!negativeNumber && !inAbs) lastOperator = false;
+        if(!negativeNumber) lastOperator = false;
     }
 }
 
@@ -137,7 +137,7 @@ void MainWindow::on_button4_clicked()
     if(nextNumber) {
         handleTextChange("4");
         canUseDot = true;
-        if(!negativeNumber && !inAbs) lastOperator = false;
+        if(!negativeNumber) lastOperator = false;
     }
 }
 
@@ -146,7 +146,7 @@ void MainWindow::on_button9_clicked()
     if(nextNumber) {
         handleTextChange("9");
         canUseDot = true;
-        if(!negativeNumber && !inAbs) lastOperator = false;
+        if(!negativeNumber) lastOperator = false;
     }
 }
 
@@ -155,7 +155,7 @@ void MainWindow::on_button8_clicked()
     if(nextNumber) {
         handleTextChange("8");
         canUseDot = true;
-        if(!negativeNumber && !inAbs) lastOperator = false;
+        if(!negativeNumber) lastOperator = false;
     }
 }
 
@@ -164,7 +164,7 @@ void MainWindow::on_button7_clicked()
     if(nextNumber) {
         handleTextChange("7");
         canUseDot = true;
-        if(!negativeNumber && !inAbs) lastOperator = false;
+        if(!negativeNumber) lastOperator = false;
     }
 }
 
