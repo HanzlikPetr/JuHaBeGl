@@ -29,7 +29,7 @@ GTEST_OBJS = gtest-all.o gtest_main.o
 
 
 
-.PHONY: all test clean run stddev
+.PHONY: all test clean run stddev pack
 
 all: $(TARGET_TEST) $(TARGET_GUI)
 
@@ -40,6 +40,9 @@ run: $(TARGET_GUI)
 	$(TARGET_GUI)
 
 stddev: $(PROFILING_OBJS) $(MATH_LIB_OBJS)
+
+pack: clean
+	cd .. && zip -r xhanzlp00_xjurokv00_xberanm00_xgleton00.zip . -x ".git/*"
 
 # Test target depends on math library objects, test objects, and Google Test objects
 $(TARGET_TEST): $(MATH_LIB_OBJS) $(TEST_OBJS) $(GTEST_OBJS) | $(GTEST_DIR)
