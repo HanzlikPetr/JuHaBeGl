@@ -1,5 +1,6 @@
 #Calculator - JuHaBeGl
 #Petr Hanzlik (xhanzlp00)
+.DEFAULT_GOAL := all
 
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -isystem googletest/googletest/include -pthread
@@ -31,7 +32,7 @@ GTEST_OBJS = gtest-all.o gtest_main.o
 
 
 
-.PHONY: all test clean run stddev pack doc
+.PHONY: all test clean run stddev pack doc help
 
 all: $(TARGET_TEST) $(TARGET_GUI) stddev
 
@@ -52,10 +53,46 @@ run: $(TARGET_GUI)
 	$(TARGET_GUI)
 
 stddev: $(PROFILING_OBJS) $(MATH_LIB_OBJS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
+help:
+	@echo "======================================================================"
+	@echo " NÁPOVĚDA K MAKEFILE / MAKEFILE HELP"
+	@echo "======================================================================"
+	@echo " Výchozí cíl (při spuštění 'make' bez parametrů) je 'make all'."
+	@echo " Default target (when running 'make' without arguments) is 'make all'."
+	@echo "----------------------------------------------------------------------"
+	@echo " [CZ] POSTUP PRO KOMPILACI NA VIRTUÁLNÍM STROJI:"
+	@echo "  1. Otevřete terminál a přejděte do složky s Makefile."
+	@echo "  2. Spusťte příkaz 'make' pro stažení závislostí a kompletní překlad."
+	@echo ""
+	@echo " DOSTUPNÉ CÍLE:"
+	@echo "  make all    - Přeloží projekt (vč. programu pro profiling) a stáhne závislosti."
+	@echo "  make pack   - Zabalí projekt tak, aby mohl být odevzdán."
+	@echo "  make clean  - Smaže všechny soubory, co nemají být odevzdány."
+	@echo "  make test   - Spustí testy matematické knihovny."
+	@echo "  make doc    - Spustí generování programové dokumentace."
+	@echo "  make run    - Spustí přeložený program."
+	@echo "  make stddev - Přeloží program pro výpočet směr. odchylky na profiling."
+	@echo "  make help   - Vypíše tuto nápovědu."
+	@echo "----------------------------------------------------------------------"
+	@echo " [EN] COMPILATION PROCESS ON A VIRTUAL MACHINE:"
+	@echo "  1. Open a terminal and navigate to the directory containing Makefile."
+	@echo "  2. Run 'make' to download dependencies and fully build the project."
+	@echo ""
+	@echo " AVAILABLE TARGETS:"
+	@echo "  make all    - Compiles the project (incl. profiling program) & gets dependencies."
+	@echo "  make pack   - Packages the project so it is ready for submission."
+	@echo "  make clean  - Deletes all files that should not be submitted."
+	@echo "  make test   - Runs tests for the mathematical library."
+	@echo "  make doc    - Generates the programming documentation."
+	@echo "  make run    - Executes the compiled program."
+	@echo "  make stddev - Compiles the standard deviation program for profiling."
+	@echo "  make help   - Displays this help message."
+	@echo "======================================================================"
 
 # Test target depends on math library objects, test objects, and Google Test objects
-$(TARGET_TEST): $(MATH_LIB_OBJS) $(TEST_OBJS) $(GTEST_OBJS) | $(GTEST_DIR)
+$(TARGET_TEST): $(MATH_LIB_OBJS) $(TEST_OBJS) $(GTEST_OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 $(GTEST_DIR):
@@ -77,6 +114,8 @@ $(GUI_DIR):
 	@if [ ! -d "$@" ]; then \
 		mkdir $@; \
 	fi
+
+$(TEST_OBJS): | $(GTEST_DIR)
 
 $(TARGET_GUI): $(GUI_SRC) | $(GUI_DIR)
 	@if [ ! -f $(GUI_DIR)/Makefile ]; then \
