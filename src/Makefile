@@ -16,6 +16,8 @@ GUI_DIR = ./gui/build
 PROFILING_SRC= $(wildcard ./profiling/*.cpp)
 PROFILING_OBJS = $(PROFILING_SRC:.cpp=.o)
 
+ZIP_NAME = xhanzlp00_xjurokv00_xberanm00_xgleton00.zip
+
 ALL_DEPS = $(MATH_LIB_OBJS:.o=.d) $(TEST_OBJS:.o=.d) $(PROFILING_OBJS:.o=.d)
 
 
@@ -29,20 +31,28 @@ GTEST_OBJS = gtest-all.o gtest_main.o
 
 
 
-.PHONY: all test clean run stddev pack
+.PHONY: all test clean run stddev pack doc
 
-all: $(TARGET_TEST) $(TARGET_GUI)
+all: $(TARGET_TEST) $(TARGET_GUI) stddev
+
+pack: clean
+	cd .. && zip -r $(ZIP_NAME) .
+
+clean:
+	rm -f $(TARGET_TEST) $(MATH_LIB_OBJS) $(TEST_OBJS) $(ALL_DEPS) $(GTEST_OBJS) $(PROFILING_OBJS) ../$(ZIP_NAME)
+	rm -rf $(GTEST_DIR) $(GUI_DIR)
 
 test: $(TARGET_TEST)
 	./$(TARGET_TEST)
+
+doc:
+	doxygen Doxyfile
 
 run: $(TARGET_GUI)
 	$(TARGET_GUI)
 
 stddev: $(PROFILING_OBJS) $(MATH_LIB_OBJS)
 
-pack: clean
-	cd .. && zip -r xhanzlp00_xjurokv00_xberanm00_xgleton00.zip . -x ".git/*"
 
 # Test target depends on math library objects, test objects, and Google Test objects
 $(TARGET_TEST): $(MATH_LIB_OBJS) $(TEST_OBJS) $(GTEST_OBJS) | $(GTEST_DIR)
@@ -79,9 +89,5 @@ $(TARGET_GUI): $(GUI_SRC) | $(GUI_DIR)
 # Pattern rule to compile .cpp files into .o files, generating dependency files as well
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
-
-clean:
-	rm -f $(TARGET_TEST) $(MATH_LIB_OBJS) $(TEST_OBJS) $(ALL_DEPS) $(GTEST_OBJS)
-	rm -rf $(GTEST_DIR) $(GUI_DIR)
 
 -include $(ALL_DEPS)
