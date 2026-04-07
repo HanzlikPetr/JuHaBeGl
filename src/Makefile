@@ -13,7 +13,10 @@ TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 GUI_SRC =  $(wildcard ./gui/*.cpp) $(wildcard ./gui/*.h) $(wildcard ./gui/*.ui) $(wildcard ./gui/*.qm)
 GUI_DIR = ./gui/build
 
-ALL_DEPS = $(MATH_LIB_OBJS:.o=.d) $(TEST_OBJS:.o=.d)
+PROFILING_SRC= $(wildcard ./profiling/*.cpp)
+PROFILING_OBJS = $(PROFILING_SRC:.cpp=.o)
+
+ALL_DEPS = $(MATH_LIB_OBJS:.o=.d) $(TEST_OBJS:.o=.d) $(PROFILING_OBJS:.o=.d)
 
 
 TARGET_TEST = run_tests
@@ -26,7 +29,7 @@ GTEST_OBJS = gtest-all.o gtest_main.o
 
 
 
-.PHONY: all test clean run
+.PHONY: all test clean run stddev
 
 all: $(TARGET_TEST) $(TARGET_GUI)
 
@@ -36,8 +39,10 @@ test: $(TARGET_TEST)
 run: $(TARGET_GUI)
 	$(TARGET_GUI)
 
+stddev: $(PROFILING_OBJS) $(MATH_LIB_OBJS)
+
 # Test target depends on math library objects, test objects, and Google Test objects
-$(TARGET_TEST): $(MATH_LIB_OBJS) $(TEST_OBJS) $(GTEST_OBJS)
+$(TARGET_TEST): $(MATH_LIB_OBJS) $(TEST_OBJS) $(GTEST_OBJS) | $(GTEST_DIR)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 $(GTEST_DIR):
@@ -69,7 +74,7 @@ $(TARGET_GUI): $(GUI_SRC) | $(GUI_DIR)
 	$(MAKE) -C $(GUI_DIR)
 
 # Pattern rule to compile .cpp files into .o files, generating dependency files as well
-%.o: %.cpp | $(GTEST_DIR)
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
 
 clean:
