@@ -18,10 +18,22 @@ class Calculator;
 }
 QT_END_NAMESPACE
 
+/**
+ * @class MainWindow
+ * @brief The main window class for the calculator application.
+ * * Inherits from QMainWindow and manages the user interface and interactions
+ * for the calculator. Handles button clicks, keyboard input, and maintains
+ * the internal state of the calculator expression.
+ */
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
    public:
+   /**
+     * @brief Constructs the main window and initializes the UI components.
+     * * Sets up the user interface and initializes internal state variables.
+     * @param parent The parent widget, default is nullptr.
+     */
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 

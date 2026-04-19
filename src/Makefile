@@ -41,7 +41,7 @@ pack: clean
 
 clean:
 	rm -f $(TARGET_TEST) $(MATH_LIB_OBJS) $(TEST_OBJS) $(ALL_DEPS) $(GTEST_OBJS) $(PROFILING_OBJS) ../$(ZIP_NAME)
-	rm -rf $(GTEST_DIR) $(GUI_DIR)
+	rm -rf $(GTEST_DIR) $(GUI_DIR) html
 
 test: $(TARGET_TEST)
 	./$(TARGET_TEST)
