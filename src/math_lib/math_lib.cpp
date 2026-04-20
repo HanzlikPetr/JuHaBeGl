@@ -48,7 +48,7 @@ double multiply(double a, double b) { return a * b; }
 
 double divide(double a, double b) {
     if (b == 0.0) {
-        throw std::invalid_argument("Error: Division by zero!\n");
+        throw std::invalid_argument("Error: Division by zero\n");
     }
 
     return a / b;
@@ -56,7 +56,7 @@ double divide(double a, double b) {
 
 double factorial(int n) {
     if (n < 0.0) {
-        throw std::invalid_argument("Error: Factorial for negative numbers is not defined!\n");
+        throw std::invalid_argument("Error: Factorial for negative numbers is not defined\n");
     }
 
     double result = 1;
@@ -84,11 +84,11 @@ double power(double base, int exponent) {
 
 double root(int degree, double base) {
     if (degree == 0) {
-        throw std::invalid_argument("Error: Invalid degree of root!\n");
+        throw std::invalid_argument("Error: Invalid degree of root\n");
     } else if ((degree % 2 == 0) && (base < 0)) {
-        throw std::invalid_argument("Error: Result is not a real number!\n");
+        throw std::invalid_argument("Error: Result is not a real number\n");
     } else if (base == 0 && degree < 0) {
-        throw std::invalid_argument("Error: Division by hehehzero!\n");
+        throw std::invalid_argument("Error: Division by zero\n");
     }
 
     double absBase = absoluteValue(base);
@@ -262,7 +262,7 @@ std::vector<Token> parseInput(std::string expression) {
                 expectOperand = false;
             }
         } else {
-            throw std::invalid_argument("Error: Unexpected input!\n");
+            throw std::invalid_argument("Error: Unexpected input\n");
         }
     }
 
@@ -293,7 +293,7 @@ std::vector<Token> shuntingYard(std::vector<Token> tokens) {
             }
 
             if (operation.empty()) {
-                throw std::invalid_argument("Error: Empty brackets!\n");
+                throw std::invalid_argument("Error: Syntax error\n");
             }
 
             operation.pop();
@@ -305,7 +305,7 @@ std::vector<Token> shuntingYard(std::vector<Token> tokens) {
             }
 
             if (operation.empty()) {
-                throw std::invalid_argument("Error: Empty absolute value!\n");
+                throw std::invalid_argument("Error: Syntax error\n");
             }
 
             /* Add operation that performs absolute value */
@@ -360,7 +360,7 @@ double evaluate(std::vector<Token> postfix) {
                 a = numbers.top();
                 numbers.pop();
             } else {
-                throw std::invalid_argument("Error: Too many operators!\n");
+                throw std::invalid_argument("Error: Syntax error\n");
             }
 
             double result;
@@ -404,7 +404,7 @@ double evaluate(std::vector<Token> postfix) {
             if (numbers.size() >= 1) {
                 a = numbers.top();
             } else {
-                throw std::invalid_argument("Error: Too many operators!\n");
+                throw std::invalid_argument("Error: Syntax error\n");
             }
             numbers.pop();
             double result;
@@ -434,5 +434,8 @@ double evaluate(std::vector<Token> postfix) {
 double evalString(std::string expression) {
     auto tokens = parseInput(expression);
     auto postfix = shuntingYard(tokens);
-    return evaluate(postfix);
+    auto result = evaluate(postfix);
+    printf("%f\n", result);
+
+    return result;
 }
