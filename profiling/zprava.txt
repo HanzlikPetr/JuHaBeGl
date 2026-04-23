@@ -1,0 +1,4 @@
+Program stddev tráví nejvíce času ve funkci "power(double, int)", která je zodpovědná za 50 % celkového času běhu programu viz. vystup.txt z programu gprof.
+Zbývajících 50 % času je rovnoměrně rozděleno mezi základní aritmetické operace "add(double, double)" (25 %) a "subtract(double, double)" (25 %).
+
+Při optimalizaci kódu je nejlpší se zaměřit na funkce/části kódu, které zabírají nejvíce času při běhu programu, zde např. na funkci "power(double, int)".

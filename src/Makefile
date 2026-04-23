@@ -53,7 +53,7 @@ run: $(TARGET_GUI)
 	$(TARGET_GUI)
 
 stddev: $(PROFILING_OBJS) $(MATH_LIB_OBJS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) -g -pg $^ -o $@
 
 help:
 	@echo "======================================================================"

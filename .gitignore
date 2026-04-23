@@ -14,6 +14,8 @@ run_tests
 
 googletest
 
+stddev
+
 *.zip
 /src/html
 #gt generated
