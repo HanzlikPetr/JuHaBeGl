@@ -201,28 +201,24 @@
         <translation>Chyba</translation>
     </message>
     <message>
-        <source>Error: Division by zero!&#x0a;</source>
-        <translation>Chyba: Dělení nulou!&#x0a;</translation>
+        <source>Error: Division by zero&#x0a;</source>
+        <translation>Chyba: Dělení nulou! Změňte dělitele na nenulovou hodnotu.&#x0a;</translation>
     </message>
     <message>
-        <source>Error: Factorial for negative numbers is not defined!&#x0a;</source>
-        <translation>Chyba: Faktoriál pro záporná čísla není definován!&#x0a;</translation>
+        <source>Error: Factorial for negative numbers is not defined&#x0a;</source>
+        <translation>Chyba: Faktoriál pro záporná čísla není definován! Použijte kladné celé číslo nebo nulu.&#x0a;</translation>
     </message>
     <message>
         <source>Error: Undefined&#x0a;</source>
         <translation>Chyba: Nedefinováno&#x0a;</translation>
     </message>
     <message>
-        <source>Error: Invalid degree of root!&#x0a;</source>
-        <translation>Chyba: Neplatný stupeň odmocniny!&#x0a;</translation>
+        <source>Error: Invalid degree of root&#x0a;</source>
+        <translation>Chyba: Neplatný stupeň odmocniny! Zadejte prosím nenulové číslo jako stupeň.&#x0a;</translation>
     </message>
     <message>
-        <source>Error: Result is not a real number!&#x0a;</source>
-        <translation>Chyba: Výsledek není reálné číslo!&#x0a;</translation>
-    </message>
-    <message>
-        <source>Error: Division by hehehzero!&#x0a;</source>
-        <translation>Chyba: Dělení nulou!&#x0a;</translation>
+        <source>Error: Result is not a real number&#x0a;</source>
+        <translation>Chyba: Výsledek není reálné číslo! Zkontrolujte, zda se nepokoušíte např. o sudou odmocninu ze záporného čísla.&#x0a;</translation>
     </message>
     <message>
         <source>Error: Exponent must be a round number&#x0a;</source>
@@ -233,24 +229,28 @@
         <translation>Chyba: Nebyl zadán žádný vstup&#x0a;</translation>
     </message>
     <message>
-        <source>Error: Unexpected input!&#x0a;</source>
-        <translation>Chyba: Neočekávaný vstup!&#x0a;</translation>
+        <source>Error: Unexpected input&#x0a;</source>
+        <translation>Chyba: Neočekávaný vstup! Zkontrolujte, zda nedošlo k překlepu nebo použití nepovolených znaků.&#x0a;</translation>
     </message>
     <message>
-        <source>Error: Empty brackets!&#x0a;</source>
-        <translation>Chyba: Prázdné závorky!&#x0a;</translation>
+        <source>Error: Syntax error&#x0a;</source>
+        <translation>Chyba: Syntaktická chyba! Zkontrolujte správnost zadaného výrazu.&#x0a;</translation>
     </message>
     <message>
-        <source>Error: Empty absolute value!&#x0a;</source>
-        <translation>Chyba: Prázdná absolutní hodnota!&#x0a;</translation>
+        <source>Error: Empty brackets&#x0a;</source>
+        <translation>Chyba: Prázdné závorky! Vložte do závorek hodnotu nebo výraz k výpočtu.&#x0a;</translation>
+    </message>
+    <message>
+        <source>Error: Empty absolute value&#x0a;</source>
+        <translation>Chyba: Prázdná absolutní hodnota! Vložte mezi svislé čáry hodnotu nebo výraz.&#x0a;</translation>
     </message>
     <message>
         <source>Error: Mismatched brackets&#x0a;</source>
         <translation>Chyba: Nespárované závorky&#x0a;</translation>
     </message>
     <message>
-        <source>Error: Too many operators!&#x0a;</source>
-        <translation>Chyba: Příliš mnoho operátorů!&#x0a;</translation>
+        <source>Error: Too many operators&#x0a;</source>
+        <translation>Chyba: Příliš mnoho operátorů! Odstraňte nadbytečné znaky, které jdou bezprostředně po sobě (např. "++").&#x0a;</translation>
     </message>
     <message>
         <source>Error: Unknown operator&#x0a;</source>
