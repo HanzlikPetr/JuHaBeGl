@@ -1,0 +1,4 @@
+xhanzlp00 100 (GUI a Makefile)
+xberanm00 100 (matematicka knihovna)
+xgleton00 100 (profiling, instalátory)
+xjurokv00 100 (testy, dokumentace)
