@@ -32,7 +32,7 @@ GTEST_OBJS = gtest-all.o gtest_main.o
 
 
 
-.PHONY: all test clean run stddev pack doc help
+.PHONY: all test clean run stddev pack doc help install install-kalkulacka install-stddev
 
 all: $(TARGET_TEST) $(TARGET_GUI) stddev
 
@@ -130,3 +130,17 @@ $(TARGET_GUI): $(GUI_SRC) | $(GUI_DIR)
 	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
 
 -include $(ALL_DEPS)
+
+# Install for dpkg build-package
+
+install: install-kalkulacka install-stddev
+
+install-kalkulacka: $(TARGET_GUI)
+	mkdir -p $(DESTDIR)/usr/bin
+
+	install $(TARGET_GUI) $(DESTDIR)/usr/bin/kalkulacka
+
+install-stddev: stddev
+	mkdir -p $(DESTDIR)/usr/bin
+
+	install stddev $(DESTDIR)/usr/bin/stddev
