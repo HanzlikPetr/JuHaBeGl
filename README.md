@@ -43,12 +43,12 @@ Nutné balíčky pro kompilaci:
 - `doxygen` (pro generování dokumentace)
 - `git` (pro klonování repozitáře)
 - `zip`/`tar` (pro balení projektu)
-- 'gt6-base-dev' (pro grafické rozhraní)
+- `qt6-base-dev` (pro grafické rozhraní)
 
 *instalace balíčků se může lišit v závislosti na distribuci, například pro Ubuntu:*
 ```bash
 sudo apt update
-sudo apt install build-essential make doxygen git zip tar gt6-base-dev
+sudo apt install build-essential make doxygen git zip tar qt6-base-dev
 ```
 
 1. **Získejte zdrojové kódy:**
