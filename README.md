@@ -40,15 +40,16 @@ Postup manuálního překladu
 Nutné balíčky pro kompilaci:
 - `gcc` (pro překlad C kódu)
 - `make` (pro správu build procesu)
+- `cmake` (pro konfiguraci projektu)
 - `doxygen` (pro generování dokumentace)
 - `git` (pro klonování repozitáře)
-- `zip`/`tar` (pro balení projektu)
+- `zip` (pro balení projektu)
 - `qt6-base-dev` (pro grafické rozhraní)
 
 *instalace balíčků se může lišit v závislosti na distribuci, například pro Ubuntu:*
 ```bash
 sudo apt update
-sudo apt install build-essential make doxygen git zip tar qt6-base-dev
+sudo apt install build-essential make doxygen git zip cmake qt6-base-dev
 ```
 
 1. **Získejte zdrojové kódy:**
@@ -56,7 +57,7 @@ sudo apt install build-essential make doxygen git zip tar qt6-base-dev
      ```bash
      git clone [https://github.com/HanzlikPetr/JuHaBeGl.git](https://github.com/HanzlikPetr/JuHaBeGl.git)
      ```
-   * NEBO rozbalením odevzdaného `.zip`/`.tar.gz` archivu.
+   * NEBO rozbalením odevzdaného `.zip` archivu.
 
 2. **Sestavení a spuštění:**
    Otevřete terminál, přejděte do kořenové složky projektu a zadejte:
