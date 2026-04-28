@@ -75,6 +75,10 @@ help:
 	@echo "  make run    - Spustí přeložený program."
 	@echo "  make stddev - Přeloží program pro výpočet směr. odchylky na profiling."
 	@echo "  make help   - Vypíše tuto nápovědu."
+	@echo "  make install-manual - Nainstaluje programy kalkulačka a stddev do systému (vyžaduje práva správce)."
+	@echo "  make uninstall-manual - Odinstaluje programy kalkulačka a stddev z systému (vyžaduje práva správce)."
+	@echo "  make install-kalkulacka || make install-stddev - Nainstaluje pouze kalkulačku nebo pouze stddev do systému (vyžaduje práva správce)."
+	@echo "  make uninstall-kalkulacka || make uninstall-stddev - Odinstaluje pouze kalkulačku nebo pouze stddev z systému (vyžaduje práva správce)."
 	@echo "----------------------------------------------------------------------"
 	@echo " [EN] COMPILATION PROCESS ON A VIRTUAL MACHINE:"
 	@echo "  1. Open a terminal and navigate to the directory containing Makefile."
@@ -89,6 +93,10 @@ help:
 	@echo "  make run    - Executes the compiled program."
 	@echo "  make stddev - Compiles the standard deviation program for profiling."
 	@echo "  make help   - Displays this help message."
+	@echo "  make install-manual - Installs the calculator and stddev programs to the system (requires admin rights)."
+	@echo "  make uninstall-manual - Uninstalls the calculator and stddev programs from the system (requires admin rights)."
+	@echo "  make install-kalkulacka || make install-stddev - Installs only the calculator or only stddev to the system (requires admin rights)."
+	@echo "  make uninstall-kalkulacka || make uninstall-stddev - Uninstalls only the calculator or only stddev from the system (requires
 	@echo "======================================================================"
 
 # Manual installation targets
