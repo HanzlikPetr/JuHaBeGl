@@ -34,6 +34,9 @@ Projekt obsahuje `Makefile` s následujícími hlavními cíly:
 | `make pack` | Zabalí projekt do archivu pro finální odevzdání. |
 | `make clean` | Smaže všechny dočasné, objektové a vygenerované soubory. |
 | `make help` | Zobrazí nápovědu pro kompilaci a spuštění v terminálu. |
+| `make` | Výchozí cíl, který spustí `make all`. |
+| `make install-manual` | Spustí manuální instalaci, která nahrazuje instalator pomocí .deb balíčku. |
+| `make uninstall-manual` | Spustí manuální odinstalaci |
 
 Postup manuálního překladu
 ---------
@@ -54,9 +57,6 @@ sudo apt install build-essential make doxygen git zip cmake qt6-base-dev
 
 1. **Získejte zdrojové kódy:**
    * Naklonováním repozitáře:
-     ```bash
-     git clone [https://github.com/HanzlikPetr/JuHaBeGl.git](https://github.com/HanzlikPetr/JuHaBeGl.git)
-     ```
    * NEBO rozbalením odevzdaného `.zip` archivu.
 
 2. **Sestavení a spuštění:**
