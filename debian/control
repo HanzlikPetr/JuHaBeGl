@@ -1,0 +1,26 @@
+Source: kalkulacka
+Section: math
+Priority: optional
+Maintainer: Ondřej Glet <xgleton00@stud.fit.vut.cz>
+Rules-Requires-Root: no
+Build-Depends:
+ debhelper-compat (= 13), git, make, cmake, qt6-base-dev, qt6-base-dev-tools
+Standards-Version: 4.6.2
+Homepage: https://github.com/HanzlikPetr/JuHaBeGl
+
+Package: kalkulacka
+Architecture: any
+Multi-Arch: foreign
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: A simple calculator app
+ Extended description of your calculator goes here.
+
+Package: stddev
+Architecture: any
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+Description: Standalone standard deviation calculator
+ Extended description of your stddev program goes here.

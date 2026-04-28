@@ -100,3 +100,7 @@ src/gui/.pch/
 src/gui/.rcc/
 src/gui/.uic/
 src/gui/build*/
+
+# Debian package stuff
+debian/tmp/*
+debian/debhelper*

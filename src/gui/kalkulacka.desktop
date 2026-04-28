@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Kalkulacka
+GenericName=Calculator
+Comment=A simple GUI calculator app
+Exec=kalkulacka
+Icon=/usr/share/icons/hicolor/256x256/apps/app_icon.png
+Type=Application
+Categories=Qt;Utility;Calculator;Math;
+Terminal=false
+X-KDE-StartupNotify=false
