@@ -32,7 +32,7 @@ GTEST_OBJS = gtest-all.o gtest_main.o
 
 
 
-.PHONY: all test clean run stddev pack doc help install install-kalkulacka install-stddev
+.PHONY: all test clean run pack doc help install install-kalkulacka install-stddev install-manual uninstall-manual install-manual-kalkulacka install-manual-stddev uninstall-manual-stddev uninstall-manual-kalkulacka
 
 all: $(TARGET_TEST) $(TARGET_GUI) stddev
 
@@ -90,6 +90,38 @@ help:
 	@echo "  make stddev - Compiles the standard deviation program for profiling."
 	@echo "  make help   - Displays this help message."
 	@echo "======================================================================"
+
+# Manual installation targets
+install-manual: install-manual-kalkulacka install-manual-stddev
+
+install-manual-kalkulacka: $(TARGET_GUI)
+	cp ./gui/build/gui_calculator /usr/local/bin/kalkulacka
+	chmod +x /usr/local/bin/kalkulacka
+	cp gui/app_icon.png /usr/share/icons/hicolor/256x256/apps/app_icon.png
+	chmod 644 /usr/share/icons/hicolor/256x256/apps/app_icon.png
+	gtk-update-icon-cache -f -t /usr/share/icons/hicolor
+	cp gui/kalkulacka.desktop /usr/share/applications/
+	chmod 644 /usr/share/applications/kalkulacka.desktop
+	update-desktop-database
+
+install-manual-stddev: stddev
+	cp ./stddev /usr/local/bin/stddev
+	chmod +x /usr/local/bin/stddev
+
+#manual uninstallation targets
+uninstall-manual:uninstall-manual-kalkulacka uninstall-manual-stddev
+
+uninstall-manual-kalkulacka:
+	rm -f /usr/local/bin/kalkulacka
+	rm -f /usr/share/icons/hicolor/256x256/apps/app_icon.png
+	rm -f /usr/share/applications/kalkulacka.desktop
+	gtk-update-icon-cache -f -t /usr/share/icons/hicolor
+	update-desktop-database
+
+uninstall-manual-stddev:
+	rm -f /usr/local/bin/stddev
+	gtk-update-icon-cache -f -t /usr/share/icons/hicolor
+	update-desktop-database
 
 # Test target depends on math library objects, test objects, and Google Test objects
 $(TARGET_TEST): $(MATH_LIB_OBJS) $(TEST_OBJS) $(GTEST_OBJS)
